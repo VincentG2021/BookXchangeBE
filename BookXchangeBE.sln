@@ -3,15 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32526.322
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookXchangeBE", "BookXchangeBE\BookXchangeBE.csproj", "{38D3B028-BD43-495E-B451-B8C4E8E52A32}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookXchangeBE", "BookXchangeBE\BookXchangeBE.csproj", "{38D3B028-BD43-495E-B451-B8C4E8E52A32}"
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "BookXchangeBE.DB", "BookXchangeBE.DB\BookXchangeBE.DB.sqlproj", "{ED8A5CE8-E4EA-43F2-893A-115F1197969A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookXchangeBE.DAL", "BookXchangeBE.DAL\BookXchangeBE.DAL.csproj", "{A585EFBC-887C-434A-8DD5-65B1D55D7759}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookXchangeBE.DAL", "BookXchangeBE.DAL\BookXchangeBE.DAL.csproj", "{A585EFBC-887C-434A-8DD5-65B1D55D7759}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookXchangeBE.BLL", "BookXchangeBE.BLL\BookXchangeBE.BLL.csproj", "{89152D35-C69C-4273-859B-31273139BE2E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookXchangeBE.BLL", "BookXchangeBE.BLL\BookXchangeBE.BLL.csproj", "{89152D35-C69C-4273-859B-31273139BE2E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookXchangeBE.API", "BookXchangeBE.API\BookXchangeBE.API.csproj", "{B374EA01-6B32-43A1-99E9-0439B24D199C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookXchangeBE.API", "BookXchangeBE.API\BookXchangeBE.API.csproj", "{B374EA01-6B32-43A1-99E9-0439B24D199C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tools.Connections", "Tools.Connections\Tools.Connections.csproj", "{51D54D76-A881-4E91-B487-9E787DD992F0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +43,10 @@ Global
 		{B374EA01-6B32-43A1-99E9-0439B24D199C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B374EA01-6B32-43A1-99E9-0439B24D199C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B374EA01-6B32-43A1-99E9-0439B24D199C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51D54D76-A881-4E91-B487-9E787DD992F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51D54D76-A881-4E91-B487-9E787DD992F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51D54D76-A881-4E91-B487-9E787DD992F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51D54D76-A881-4E91-B487-9E787DD992F0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
