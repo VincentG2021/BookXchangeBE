@@ -56,5 +56,23 @@
   <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
   <ItemGroup>
     <Folder Include="Properties" />
+    <Folder Include="Scripts" />
+    <Folder Include="Tables" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="Scripts\SEED_BookXchange.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="Tables\Membre.sql" />
+    <Build Include="Tables\Livre.sql" />
+    <Build Include="Tables\Exemplaire.sql" />
+    <Build Include="Tables\Edition.sql" />
+    <Build Include="Tables\Echange.sql" />
+    <Build Include="Tables\Categorie.sql" />
+    <Build Include="Tables\Livre_Categorie.sql" />
+    <Build Include="Tables\Message.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="BookXchangeBE.DB.publish.xml" />
   </ItemGroup>
 </Project>
