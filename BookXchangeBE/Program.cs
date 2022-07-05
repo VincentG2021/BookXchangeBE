@@ -1,7 +1,32 @@
+using BookXchangeBE.BLL.Services;
+using BookXchangeBE.DAL.Interfaces;
+using BookXchangeBE.DAL.Repositories;
+using System.Data.SqlClient;
+using Tools.Connections;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+// ToolBox Tools.Connections
+builder.Services.AddTransient<Connection>((service) =>
+{
+    return new Connection(
+        SqlClientFactory.Instance,
+        builder.Configuration.GetConnectionString("Default")
+    );
+});
+
+// - DAL
+builder.Services.AddTransient<ILivreRepository, LivreRepository>();
+builder.Services.AddTransient<IMembreRepository, MembreRepository>();
+
+// - BLL
+builder.Services.AddTransient<LivreService>();
+builder.Services.AddTransient<MembreService>();
+
+
 
 var app = builder.Build();
 

@@ -1,0 +1,55 @@
+﻿@model IEnumerable<BookXchangeBE.Models.Livre>
+
+@{
+    ViewData["Title"] = "Liste de livres";
+}
+
+<h1>Liste de livres</h1>
+
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IdLivre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Titre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Auteur)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Synopsis)
+            </th>
+            <th>
+                Details
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdLivre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Titre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Auteur)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Synopsis)
+            </td>
+
+            <td>
+                <a class ="text-primary " asp-controller="BookList" asp-action="Details" asp-route-id ="@item.IdLivre" >
+                    <i class="bi bi-search"> go to details </i>
+                </a>
+            </td>
+                                    
+        </tr>
+}
+    </tbody>
+</table>
