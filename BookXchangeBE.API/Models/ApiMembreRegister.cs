@@ -1,29 +1,9 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace BookXchangeBE.Models
+namespace BookXchangeBE.API.Models
 {
-    public class Membre
-    {
-        public int IdMembre { get; set; }
-
-        [DisplayName("Pseudo")]
-        public string Pseudo { get; set; }
-
-        [DisplayName("E-Mail")]
-        public string Email { get; set; }
-
-        [DisplayName("Prénom")]
-        public string? Prenom { get; set; }
-
-        [DisplayName("Nom")]
-        public string? Nom { get; set; }
-
-        [DisplayName("Role")]
-        public int Role { get; set; }
-    }
-
-    public class MembreRegister
+    public class ApiMembreRegister
     {
         [DisplayName("Pseudo")]
         [Required]
@@ -49,19 +29,6 @@ namespace BookXchangeBE.Models
 
         [DisplayName("Role")]
         public int Role { get; set; }
-
-    }
-
-    public class MembreLogin
-    {
-        [DisplayName("Pseudo")]
-        [Required]
-        public string Pseudo { get; set; }
-
-        [DisplayName("Mot de passe")]
-        [Required]
-        [DataType(DataType.Password)]
-        public string Password { get; set; }
 
     }
 }

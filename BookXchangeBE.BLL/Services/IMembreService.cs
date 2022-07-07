@@ -14,6 +14,10 @@ namespace BookXchangeBE.BLL.Services
         MembreDTO GetById(int id);
         MembreDTO GetByPseudo(string pseudo);
 
+        bool CheckCredentials(string pseudo, string pwd);
+
+        ConnectedMemberDTO ConnectMember(string pseudo, string password);
+
         MembreDTO Insert(string pseudo, string email, string pwd, int role);
         bool Update(int id, MembreDTO membre);
 
