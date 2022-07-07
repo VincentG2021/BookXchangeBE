@@ -14,6 +14,15 @@ namespace BookXchangeBE.Controllers
             this.membreService = membreService;
         }
 
+        public IActionResult MemberList()
+        {
+            IEnumerable<Membre> membres = membreService.GetAll()
+                .Select(b => b.ToModel())
+                .OrderBy(b => b.Pseudo);
+
+            return View(membres);
+        }
+
         public IActionResult Register()
         {
             return View();
