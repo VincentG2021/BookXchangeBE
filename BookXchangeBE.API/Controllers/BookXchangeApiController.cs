@@ -45,7 +45,7 @@ namespace BookXchangeBE.API.Controllers
         }
 
 
-
+        [AllowAnonymous]
         [HttpPost]
         public IActionResult RegisterMembre(ApiMembreModel membre)
         {

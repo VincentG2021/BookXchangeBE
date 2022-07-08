@@ -34,7 +34,7 @@ builder.Services.AddTransient<Connection>((service) =>
 {
     return new Connection(
         SqlClientFactory.Instance,
-        builder.Configuration.GetConnectionString("Home")
+        builder.Configuration.GetConnectionString("Default")
     );
 });
 
