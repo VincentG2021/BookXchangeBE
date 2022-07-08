@@ -7,6 +7,7 @@ namespace BookXchangeBE.Controllers
 {
     public class MembreController : Controller
     {
+
         private MembreService membreService;
 
         public MembreController(MembreService membreService)
@@ -59,6 +60,7 @@ namespace BookXchangeBE.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+
         public IActionResult Login()
         {
             return View();
@@ -86,6 +88,8 @@ namespace BookXchangeBE.Controllers
 
             // TODO Store Member in Session
             Console.WriteLine($"Member login with id {membre.IdMembre}");
+
+
 
             return RedirectToAction("Index", "Home");
         }

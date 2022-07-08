@@ -1,5 +1,6 @@
 ﻿using BookXchangeBE.BLL.DTO;
 using BookXchangeBE.BLL.Mappers;
+using BookXchangeBE.BLL.Tools;
 using BookXchangeBE.DAL.Entities;
 using BookXchangeBE.DAL.Interfaces;
 using Isopoh.Cryptography.Argon2;
@@ -14,10 +15,13 @@ namespace BookXchangeBE.BLL.Services
     public class MembreService : IMembreService
     {
         private IMembreRepository membreRepository;
+        private JwtManager _jwt;
 
-        public MembreService(IMembreRepository membreRepository)
+        public MembreService(IMembreRepository membreRepository, JwtManager jwt)
         {
             this.membreRepository = membreRepository;
+            this._jwt = jwt;
+
         }
 
         #region Register & Login
@@ -51,6 +55,29 @@ namespace BookXchangeBE.BLL.Services
         public bool CheckMemberExists(string pseudo, string email)
         {
             return membreRepository.CheckMemberExists(pseudo, email);
+        }
+
+        public ConnectedMemberDTO ConnectMember(string pseudo, string password)
+        {
+            MembreDTO membre = membreRepository.GetByPseudo(pseudo).ToDTO();
+
+            string token = _jwt.GenerateToken(membre);
+
+            ConnectedMemberDTO cmDTO = new ConnectedMemberDTO()
+            {
+                IdMembre = membre.IdMembre,
+                Pseudo = membre.Pseudo,
+                Email = membre.Email,
+                Prenom = membre.Prenom,
+                Nom = membre.Nom,
+                Role = membre.Role,
+                Token = token
+
+            };
+                
+
+            Console.WriteLine($"token : {cmDTO.Token} ");
+            return (cmDTO);
         }
         #endregion
 

@@ -1,4 +1,5 @@
 using BookXchangeBE.BLL.Services;
+using BookXchangeBE.BLL.Tools;
 using BookXchangeBE.DAL.Interfaces;
 using BookXchangeBE.DAL.Repositories;
 using System.Data.SqlClient;
@@ -14,7 +15,7 @@ builder.Services.AddTransient<Connection>((service) =>
 {
     return new Connection(
         SqlClientFactory.Instance,
-        builder.Configuration.GetConnectionString("Home")
+        builder.Configuration.GetConnectionString("Default")
     );
 });
 
@@ -23,8 +24,10 @@ builder.Services.AddTransient<ILivreRepository, LivreRepository>();
 builder.Services.AddTransient<IMembreRepository, MembreRepository>();
 
 // - BLL
+builder.Services.AddTransient<JwtManager>();
 builder.Services.AddTransient<LivreService>();
 builder.Services.AddTransient<MembreService>();
+
 
 
 

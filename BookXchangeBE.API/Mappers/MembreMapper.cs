@@ -18,6 +18,20 @@ namespace BookXchangeBE.API.Mappers
             };
         }
 
+        public static ApiConnectedMemberModel ToApiConnected(this ConnectedMemberDTO dto)
+        {
+            return new ApiConnectedMemberModel()
+            {
+                IdMembre = dto.IdMembre,
+                Pseudo = dto.Pseudo,
+                Email = dto.Email,
+                Prenom = dto.Prenom,
+                Nom = dto.Nom,
+                Role = dto.Role,
+                Token = dto.Token
+            };
+        }
+
         public static MembreDTO ToDTO(this ApiMembreModel membre)
         {
             return new MembreDTO()
@@ -30,6 +44,5 @@ namespace BookXchangeBE.API.Mappers
                 Role = membre.Role
             };
         }
-
     }
 }
