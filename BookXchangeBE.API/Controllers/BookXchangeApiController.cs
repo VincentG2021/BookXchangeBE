@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace BookXchangeBE.API.Controllers
 {
     [ApiController]
-    [Route("api/[controller]/[action]")]
+    [Route("[controller]/[action]")]
 
     public class BookXchangeAPIController : ControllerBase
     {
@@ -63,9 +63,9 @@ namespace BookXchangeBE.API.Controllers
 
         [AllowAnonymous]
         [HttpPost("auth")]
-        public IActionResult Login([FromForm] ApiMembreLogin form)
+        public IActionResult Login(ApiMembreLogin form)
         {
-            if (!ModelState.IsValid) return BadRequest();
+            //if (!ModelState.IsValid) return BadRequest();
 
             // Validation du hashage du mot de passe
             if (!_membreService.CheckCredentials(form.Pseudo, form.Password))

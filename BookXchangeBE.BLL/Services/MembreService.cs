@@ -67,6 +67,7 @@ namespace BookXchangeBE.BLL.Services
             {
                 IdMembre = membre.IdMembre,
                 Pseudo = membre.Pseudo,
+                
                 Email = membre.Email,
                 Prenom = membre.Prenom,
                 Nom = membre.Nom,
