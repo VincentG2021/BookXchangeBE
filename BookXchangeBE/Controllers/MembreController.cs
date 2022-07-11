@@ -93,5 +93,10 @@ namespace BookXchangeBE.Controllers
 
             return RedirectToAction("Index", "Home");
         }
+        public IActionResult Logout()
+        {
+            return View();
+        }
+
     }
 }
