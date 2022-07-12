@@ -24,8 +24,8 @@ namespace BookXchangeBE.API.Controllers
             this._membreService = memberService;
         }
 
+        [Authorize("isConnected")]
         [HttpGet(Name = "GetBookList")]
-
         public IActionResult GetBookList()
         {
             IEnumerable<LivreDTO> livres = _livreService.GetAll()
@@ -34,8 +34,8 @@ namespace BookXchangeBE.API.Controllers
             return Ok(livres.ToArray());
         }
 
+        [Authorize("isConnected")]
         [HttpGet(Name = "GetMemberList")]
-
         public IActionResult GetMemberList()
         {
             IEnumerable<MembreDTO> membres = _membreService.GetAll()
@@ -80,6 +80,5 @@ namespace BookXchangeBE.API.Controllers
             
             return Ok(connectedMember);
         }
-        //[Authorize("isConnected")]
     }
 }

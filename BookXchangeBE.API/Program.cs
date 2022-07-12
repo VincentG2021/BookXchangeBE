@@ -2,7 +2,10 @@ using BookXchangeBE.BLL.Services;
 using BookXchangeBE.BLL.Tools;
 using BookXchangeBE.DAL.Interfaces;
 using BookXchangeBE.DAL.Repositories;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 using System.Data.SqlClient;
+using System.Text;
 using Tools.Connections;
 
 var BookXchangeAPICorsPolicy = "_BookXchangeAPICorsPolicy";
@@ -21,13 +24,35 @@ builder.Services.AddCors(options =>
                       });
 });
 
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("isConnected", policy => policy.RequireAuthenticatedUser());
+});
+
+//Vérification de la validité du token
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration.GetSection("JwtToken").GetSection("secret").ToString())),
+            ValidateIssuer = false,
+            ValidIssuer = builder.Configuration.GetSection("JwtToken").GetSection("issuer").Value,
+            ValidateAudience = false,
+            ValidAudience = builder.Configuration.GetSection("JwtToken").GetSection("audience").Value
+        };
+    });
+
+
 // Add services to the container.
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddScoped(typeof(LivreService));
+
 
 // ToolBox Tools.Connections
 builder.Services.AddTransient<Connection>((service) =>
@@ -42,9 +67,10 @@ builder.Services.AddTransient<Connection>((service) =>
 builder.Services.AddTransient<ILivreRepository, LivreRepository>();
 builder.Services.AddTransient<IMembreRepository, MembreRepository>();
 // - BLL
-builder.Services.AddTransient<JwtManager>();
-builder.Services.AddTransient<LivreService>();
-builder.Services.AddTransient<MembreService>();
+builder.Services.AddSingleton<JwtManager>();
+builder.Services.AddScoped(typeof(LivreService));
+//builder.Services.AddSingleton<LivreService>();
+builder.Services.AddSingleton<MembreService>();
 
 
 var app = builder.Build();
@@ -60,6 +86,7 @@ app.UseHttpsRedirection();
 
 app.UseCors(BookXchangeAPICorsPolicy);
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
