@@ -43,7 +43,8 @@ namespace BookXchangeBE.BLL.Tools
                 Subject = new ClaimsIdentity(myClaims),
                 Issuer = issuer,
                 Audience = audience,
-                SigningCredentials = credentials
+                SigningCredentials = credentials,
+                Expires = DateTime.UtcNow.AddDays(1),
             };
 
             JwtSecurityTokenHandler handler = new JwtSecurityTokenHandler();
