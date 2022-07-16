@@ -17,6 +17,15 @@ namespace BookXchangeBE.BLL.Mappers
                 IdExemplaire = entity.IdExemplaire,
                 IdEdition = entity.IdEdition,
                 IdMembre = entity.IdMembre,
+
+                IdLivre = entity.IdLivre,
+                Titre = entity.Titre,
+                Auteur = entity.Auteur,
+                Synopsis = entity.Synopsis,
+
+                Isbn = entity.Isbn,
+                Parution = entity.Parution,
+                Format = entity.Format
             };
         }
 
@@ -27,6 +36,16 @@ namespace BookXchangeBE.BLL.Mappers
                 IdEdition = dto.IdEdition,
                 IdExemplaire = dto.IdExemplaire,
                 IdMembre = dto.IdMembre,
+
+                IdLivre = dto.IdLivre,
+                Titre = dto.Titre,
+                Auteur = dto.Auteur,
+                Synopsis = dto.Synopsis,
+
+                Isbn = dto.Isbn,
+                Parution = dto.Parution,
+                Format = dto.Format
+
             };
         }
 

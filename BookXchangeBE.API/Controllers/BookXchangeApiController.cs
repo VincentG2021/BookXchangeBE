@@ -126,5 +126,14 @@ namespace BookXchangeBE.API.Controllers
             return Ok(exemplaires.ToArray());
         }
 
+        //[Authorize("isConnected")]
+        [HttpGet(Name = "GetMemberExemplaireList")]
+        public IActionResult GetMemberExemplaireList(int id)
+        {
+            IEnumerable<ExemplaireDTO> exemplaires = _exemplaireService.GetByMembre(id);
+
+            return Ok(exemplaires.ToArray());
+        }
+
     }
 }

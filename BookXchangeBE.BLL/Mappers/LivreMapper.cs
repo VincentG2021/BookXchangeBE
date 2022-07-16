@@ -17,7 +17,7 @@ namespace BookXchangeBE.BLL.Mappers
                 IdLivre = entity.IdLivre,
                 Titre = entity.Titre,
                 Auteur = entity.Auteur,
-                Synopsis = entity.Synopsis,
+                Synopsis = entity.Synopsis
             };
         }
 
@@ -28,7 +28,7 @@ namespace BookXchangeBE.BLL.Mappers
                 IdLivre = dto.IdLivre,
                 Titre = dto.Titre,
                 Auteur = dto.Auteur,
-                Synopsis = dto.Synopsis,
+                Synopsis = dto.Synopsis
             };
         }
 

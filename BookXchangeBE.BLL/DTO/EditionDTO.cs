@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BookXchangeBE.BLL.DTO
 {
-    public class EditionDTO
+    public class EditionDTO : LivreDTO
     {
         public int IdEdition { get; set; }
         public string Isbn { get; set; }

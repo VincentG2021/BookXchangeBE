@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BookXchangeBE.DAL.Entities
 {
-    public class EditionEntity
+    public class EditionEntity : LivreEntity
     {
         public int IdEdition { get; set; }
         public string Isbn { get; set; }

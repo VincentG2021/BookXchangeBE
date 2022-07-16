@@ -9,9 +9,19 @@ namespace BookXchangeBE.API.Mappers
         {
             return new ApiExemplaireModel()
             {
-                IdExemplaire = dto.IdExemplaire,
                 IdEdition = dto.IdEdition,
+                IdExemplaire = dto.IdExemplaire,
                 IdMembre = dto.IdMembre,
+
+                IdLivre = dto.IdLivre,
+                Titre = dto.Titre,
+                Auteur = dto.Auteur,
+                Synopsis = dto.Synopsis,
+
+                Isbn = dto.Isbn,
+                Parution = dto.Parution,
+                Format = dto.Format
+
             };
         }
 
@@ -22,6 +32,15 @@ namespace BookXchangeBE.API.Mappers
                 IdExemplaire = exemplaire.IdExemplaire,
                 IdEdition = exemplaire.IdEdition,
                 IdMembre = exemplaire.IdMembre,
+
+                IdLivre = exemplaire.IdLivre,
+                Titre = exemplaire.Titre,
+                Auteur = exemplaire.Auteur,
+                Synopsis = exemplaire.Synopsis,
+
+                Isbn = exemplaire.Isbn,
+                Parution = exemplaire.Parution,
+                Format = exemplaire.Format
             };
         }
 
