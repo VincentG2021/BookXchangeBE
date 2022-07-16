@@ -94,17 +94,17 @@ namespace BookXchangeBE.API.Controllers
             {
                 ApiConnectedMemberModel connectedMember = _membreService.GetMemberProfile(pseudo).ToApiConnected();
 
-                if(connectedMember == null)
+                if (connectedMember == null)
                 {
                     return NotFound();
                 }
                 return Ok(connectedMember);
 
             }
-            catch(Exception)
+            catch (Exception)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the database");
-            }                           
+            }
         }
 
         //[Authorize("isConnected")]
@@ -127,7 +127,9 @@ namespace BookXchangeBE.API.Controllers
         }
 
         //[Authorize("isConnected")]
-        [HttpGet(Name = "GetMemberExemplaireList")]
+        //[HttpGet(Name = "GetMemberExemplaireList")]
+        [HttpGet("{id}")]
+
         public IActionResult GetMemberExemplaireList(int id)
         {
             IEnumerable<ExemplaireDTO> exemplaires = _exemplaireService.GetByMembre(id);
