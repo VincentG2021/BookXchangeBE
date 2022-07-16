@@ -12,5 +12,8 @@ namespace BookXchangeBE.DAL.Interfaces
         bool CheckMemberExists(string pseudo, string email);
         string GetPasswordHash(string pseudo);
         MembreEntity GetByPseudo(string pseudo);
+
+        MembreEntity GetConnectedMember(string pseudo);
+
     }
 }

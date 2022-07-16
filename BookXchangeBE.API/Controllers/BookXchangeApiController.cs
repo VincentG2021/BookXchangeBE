@@ -44,7 +44,6 @@ namespace BookXchangeBE.API.Controllers
             return Ok(membres.ToArray());
         }
 
-
         [AllowAnonymous]
         [HttpPost]
         public IActionResult RegisterMembre(ApiMembreModel membre)
@@ -77,8 +76,32 @@ namespace BookXchangeBE.API.Controllers
 
             ApiConnectedMemberModel connectedMember = _membreService.ConnectMember(form.Pseudo, form.Password).ToApiConnected();
 
-            
+
             return Ok(connectedMember);
+        }
+
+        //[Authorize("isConnected")]
+        [HttpGet("{pseudo}")]
+        //[HttpGet("{id}", Name = "GetMemberProfile")]
+
+        public IActionResult GetMemberProfile(string pseudo)
+        {
+            try
+            {
+                ApiConnectedMemberModel connectedMember = _membreService.GetMemberProfile(pseudo).ToApiConnected();
+
+                if(connectedMember == null)
+                {
+                    return NotFound();
+                }
+                return Ok(connectedMember);
+
+            }
+            catch(Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the database");
+            }                           
+
         }
     }
 }

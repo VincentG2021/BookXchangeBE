@@ -38,6 +38,17 @@ namespace BookXchangeBE.BLL.Mappers
             };
         }
 
-
+        public static ConnectedMemberDTO CMToDTO(this MembreEntity entity)
+        {
+            return new ConnectedMemberDTO()
+            {
+                IdMembre = entity.IdMembre,
+                Pseudo = entity.Pseudo,
+                Email = entity.Email,
+                Prenom = entity.Prenom,
+                Nom = entity.Nom,
+                Role = entity.Role
+            };
+        }
     }
 }

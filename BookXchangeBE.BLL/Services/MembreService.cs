@@ -104,6 +104,11 @@ namespace BookXchangeBE.BLL.Services
             throw new NotImplementedException();
         }
 
+        public ConnectedMemberDTO GetMemberProfile(string pseudo)
+        {
+            return membreRepository.GetConnectedMember(pseudo).CMToDTO();
+        }
+
 
 
         public bool Update(int id, MembreDTO membre)
