@@ -25,6 +25,16 @@ namespace BookXchangeBE.DAL.Repositories
                 IdExemplaire = (int)record[TableId],
                 IdMembre = (int)record["Id_Membre"],
                 IdEdition = (int)record["Id_Edition"],
+
+                IdLivre = (int)record["Id_Livre"],
+                Titre = (string)record["Titre"],
+                Auteur = (string)record["Auteur"],
+                Synopsis = (string)record["Synopsis"],
+
+                Isbn = (string)record["ISBN"],
+                Parution = (DateTime)record["Parution"],
+                Format = (string)record["Format"]
+
             };
         }
 
@@ -44,6 +54,19 @@ namespace BookXchangeBE.DAL.Repositories
             return _Connection.ExecuteReader(cmd, MapRecordToEntity).SingleOrDefault();
         }
 
+        public IEnumerable<ExemplaireEntity> GetByMembre(int id)
+        {
+            Command cmd = new Command("SELECT M.Id_Membre, Ex.Id_Exemplaire, Ed.Id_Edition, L.Id_Livre, L.Titre, L.Auteur, L.Synopsis, Ed.ISBN, Ed.Parution, Ed.Format" +
+                " FROM Exemplaire Ex" +
+                " JOIN Membre AS M ON Ex.Id_Membre = M.Id_Membre" +
+                " JOIN Edition AS Ed ON Ex.Id_Edition = Ed.Id_Edition" +
+                " JOIN Livre AS L ON Ed.Id_Livre = L.Id_Livre" +
+                " WHERE M.Id_Membre = @Id_Membre");
+
+            cmd.AddParameter("Id_Membre", id);
+
+            return _Connection.ExecuteReader(cmd, MapRecordToEntity);
+        }
 
         public override int Insert(ExemplaireEntity entity)
         {

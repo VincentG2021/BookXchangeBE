@@ -1,6 +1,6 @@
 ﻿namespace BookXchangeBE.API.Models
 {
-    public class ApiEditionModel
+    public class ApiEditionModel : ApiLivreModel
     {
         public int IdEdition { get; set; }
         public string Isbn { get; set; }

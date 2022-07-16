@@ -29,6 +29,13 @@ namespace BookXchangeBE.BLL.Services
             return exemplaireRepository.GetById(id).ToDTO();
         }
 
+        public IEnumerable<ExemplaireDTO> GetByMembre(int id)
+        {
+            //return exemplaireRepository.GetAll().Where(c => c.IdMembre.Equals(id)).Select(b => b.ToDTO());
+            return exemplaireRepository.GetByMembre(id).Where(c => c.IdMembre.Equals(id)).Select(b => b.ToDTO());
+
+        }
+
         public bool Insert(ExemplaireDTO H)
         {
             return exemplaireRepository.Insert(H.ToEntity()) > 0;

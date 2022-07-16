@@ -19,6 +19,11 @@ namespace BookXchangeBE.BLL.Mappers
                 Parution = entity.Parution,
                 Format = entity.Format,
                 IdLivre = entity.IdLivre,
+
+                //Titre = entity.Titre,
+                //Auteur = entity.Auteur,
+                //Synopsis = entity.Synopsis
+
             };
         }
 
@@ -31,6 +36,11 @@ namespace BookXchangeBE.BLL.Mappers
                 Parution = dto.Parution,
                 Format = dto.Format,
                 IdLivre = dto.IdLivre,
+
+                //Titre = dto.Titre,
+                //Auteur = dto.Auteur,
+                //Synopsis = dto.Synopsis
+
             };
         }
 
