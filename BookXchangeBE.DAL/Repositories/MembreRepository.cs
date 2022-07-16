@@ -83,5 +83,13 @@ namespace BookXchangeBE.DAL.Repositories
 
             return _Connection.ExecuteReader(cmd, MapRecordToEntity).SingleOrDefault();
         }
+
+        public virtual MembreEntity GetConnectedMember(string pseudo)
+        {
+            Command cmd = new Command($"SELECT * FROM {TableName} WHERE Pseudo = @Pseudo");
+            cmd.AddParameter("Pseudo", pseudo);
+
+            return _Connection.ExecuteReader(cmd, MapRecordToEntity).SingleOrDefault();
+        }
     }
 }

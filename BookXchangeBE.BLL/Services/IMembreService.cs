@@ -18,6 +18,9 @@ namespace BookXchangeBE.BLL.Services
 
         ConnectedMemberDTO ConnectMember(string pseudo, string password);
 
+        ConnectedMemberDTO GetMemberProfile(string pseudo);
+
+
         MembreDTO Insert(string pseudo, string email, string pwd, int role);
         bool Update(int id, MembreDTO membre);
 
