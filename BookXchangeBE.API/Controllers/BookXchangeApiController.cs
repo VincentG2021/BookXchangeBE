@@ -17,13 +17,15 @@ namespace BookXchangeBE.API.Controllers
         IMembreService _membreService;
         ILivreService _livreService;
         IEditionService _editionService;
+        IExemplaireService _exemplaireService;
 
-        public BookXchangeAPIController(LivreService livreService, MembreService memberService, EditionService editionService)
+        public BookXchangeAPIController(LivreService livreService, MembreService memberService, EditionService editionService, ExemplaireService exemplaireService)
         {
 
-            this._livreService = livreService;
-            this._membreService = memberService;
-            this._editionService = editionService;
+            _livreService = livreService;
+            _membreService = memberService;
+            _editionService = editionService;
+            _exemplaireService = exemplaireService;
         }
 
         [Authorize("isConnected")]
@@ -113,6 +115,15 @@ namespace BookXchangeBE.API.Controllers
                                         .OrderBy(b => b.Format);
 
             return Ok(editions.ToArray());
+        }
+
+        //[Authorize("isConnected")]
+        [HttpGet(Name = "GetExemplaireList")]
+        public IActionResult GetExemplaireList()
+        {
+            IEnumerable<ExemplaireDTO> exemplaires = _exemplaireService.GetAll();
+
+            return Ok(exemplaires.ToArray());
         }
 
     }
