@@ -5,10 +5,11 @@ GO
 -- Member
 SET IDENTITY_INSERT [Membre] ON;
 GO
-
 INSERT INTO [Membre]([Id_Membre], [Pseudo], [Email], [Prenom], [Nom], [Localisation], [Pwd_Hash], [Role])
  VALUES (1, 'Vinsooe', 'atortetatravers@gmail.com', 'Vincent', 'Gadé', 'Bruxelles', '$argon2id$v=19$m=65536,t=3,p=1$/8iMVvfjmYbdwgmmSU2VMQ$bTSTfC2gqenk72HxTxoOhCbkkimyWPTOnA9k9uCvYOI', 1), -- pwd: dd
- (2, 'Yolo', 'yolo@ymail.com', 'Yohann', 'Nayo', 'Liège', '$argon2id$v=19$m=65536,t=3,p=1$/8iMVvfjmYbdwgmmSU2VMQ$bTSTfC2gqenk72HxTxoOhCbkkimyWPTOnA9k9uCvYOI', 2);
+ (2, 'Yolo', 'yolo@ymail.com', 'Yohann', 'Nayo', 'Liège', '$argon2id$v=19$m=65536,t=3,p=1$/8iMVvfjmYbdwgmmSU2VMQ$bTSTfC2gqenk72HxTxoOhCbkkimyWPTOnA9k9uCvYOI', 2), -- pwd: dd
+ (3, 'VincentHome', 'v@v', null, null, null, '$argon2id$v=19$m=65536,t=3,p=1$50FW4HC6hy0DfOr5gc3oOg$ZD2CRVxvLqWb26lIoxeabfkaz6IGmwUN8i/1MybkxXw', 3), -- pwd: Test1234=
+ (4, 'VGH', 'v@g', null, null, null, '$argon2id$v=19$m=65536,t=3,p=1$bBAIiIyBkt4dyRuSDYKrQg$9fvsWfhY8sWqP2naJ4teZK+ioykJAU7DKfPeXroh+DI', 1); -- pwd: Book4ever
 
 SET IDENTITY_INSERT [Membre] OFF;
 GO
@@ -31,10 +32,12 @@ SET IDENTITY_INSERT [Edition] ON;
 GO
 
 INSERT INTO [Edition]([Id_Edition], [ISBN], [Parution], [Format], [Id_Livre])
- VALUES (1, N'978-1-4028-9462-6', '2022-01-01', 'Poche', 1),
-        (2, N'978-1-4028-9462-6', '2022-01-01', 'Limitée', 2),
-        (3, N'978-1-4028-9462-6', '2022-01-01', 'Plastifié', 3),
-        (4, N'978-1-4028-9462-6', '2022-01-01', 'Illustrée', 4);
+ VALUES (1, N'978-1-4028-9462-6', '2001-01-01', 'Poche', 1),
+        (2, N'978-1-4028-9000-3', '2020-03-21', 'Limitée', 2),
+        (3, N'978-1-4028-1000-1', '2022-01-01', 'Plastifié', 3),
+        (4, N'978-1-4028-2222-2', '2005-06-21', 'Illustrée', 4),
+        (5, N'978-1-4028-9400-1', '1992-12-25', 'Reliure maison', 1),
+        (6, N'978-1-4028-9000-6', '2012-12-31', 'Poche', 2);
 
 SET IDENTITY_INSERT [Edition] OFF;
 GO
@@ -74,7 +77,10 @@ INSERT INTO [Exemplaire]([Id_Exemplaire], [Id_Membre], [Id_Edition])
  VALUES (1, 1, 1),
         (2, 1, 2),
         (3, 2, 3),
-        (4, 2, 4);
+        (4, 2, 4),
+        (5, 3, 5),
+        (6, 3, 6);
+
 
 SET IDENTITY_INSERT [Exemplaire] OFF;
 GO
