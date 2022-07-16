@@ -66,11 +66,12 @@ builder.Services.AddTransient<Connection>((service) =>
 // - DAL
 builder.Services.AddTransient<ILivreRepository, LivreRepository>();
 builder.Services.AddTransient<IMembreRepository, MembreRepository>();
+builder.Services.AddTransient<IEditionRepository, EditionRepository>();
 // - BLL
 builder.Services.AddSingleton<JwtManager>();
 builder.Services.AddScoped(typeof(LivreService));
-//builder.Services.AddSingleton<LivreService>();
-builder.Services.AddSingleton<MembreService>();
+builder.Services.AddScoped<MembreService>();
+builder.Services.AddScoped<EditionService>();
 
 
 var app = builder.Build();
