@@ -14,14 +14,16 @@ namespace BookXchangeBE.API.Controllers
 
     public class BookXchangeAPIController : ControllerBase
     {
-        ILivreService _livreService;
         IMembreService _membreService;
+        ILivreService _livreService;
+        IEditionService _editionService;
 
-        public BookXchangeAPIController(LivreService livreService, MembreService memberService)
+        public BookXchangeAPIController(LivreService livreService, MembreService memberService, EditionService editionService)
         {
 
             this._livreService = livreService;
             this._membreService = memberService;
+            this._editionService = editionService;
         }
 
         [Authorize("isConnected")]
@@ -101,7 +103,17 @@ namespace BookXchangeBE.API.Controllers
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the database");
             }                           
-
         }
+
+        //[Authorize("isConnected")]
+        [HttpGet(Name = "GetEditionList")]
+        public IActionResult GetEditionList()
+        {
+            IEnumerable<EditionDTO> editions = _editionService.GetAll()
+                                        .OrderBy(b => b.Format);
+
+            return Ok(editions.ToArray());
+        }
+
     }
 }
