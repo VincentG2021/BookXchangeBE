@@ -21,12 +21,12 @@ namespace BookXchangeBE.API.Controllers
         [AllowAnonymous]
         //[Authorize("isConnected")]
         [HttpPost]
-        public IActionResult AddLivre(ApiLivreModel livre)
+        public IActionResult CreateLivre(ApiLivreModel livre)
         {
-            LivreDTO dto = _livreService.Insert(livre.Titre, livre.Auteur, livre.Synopsis);
-            if (dto != null)
+            LivreDTO created = _livreService.Insert(livre.Titre, livre.Auteur, livre.Synopsis);
+            if (created != null)
             {
-                return Ok(dto);
+                return Ok(created);
             }
             else
             {
@@ -41,7 +41,7 @@ namespace BookXchangeBE.API.Controllers
             bool updated = _livreService.Update(livre.IdLivre, livre.ToDTO());
             if (updated != false)
             {
-                return new CreatedResult("/api/bookList", updated);
+                return Ok(updated);
             }
             else
             {
