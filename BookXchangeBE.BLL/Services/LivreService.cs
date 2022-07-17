@@ -1,5 +1,6 @@
 ﻿using BookXchangeBE.BLL.DTO;
 using BookXchangeBE.BLL.Mappers;
+using BookXchangeBE.DAL.Entities;
 using BookXchangeBE.DAL.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -45,9 +46,15 @@ namespace BookXchangeBE.BLL.Services
         }
 
 
-        public bool Insert(LivreDTO H)
+        public LivreDTO Insert(string Titre, string Auteur, string Synopsis)
         {
-            return livreRepository.Insert(H.ToEntity()) > 0;
+            int id = livreRepository.Insert(new LivreEntity
+            {
+                Titre = Titre,
+                Auteur = Auteur,
+                Synopsis = Synopsis
+            });
+            return livreRepository.GetById(id).ToDTO();
         }
 
         public bool Update(int id, LivreDTO H)

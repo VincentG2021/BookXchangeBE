@@ -15,7 +15,7 @@ namespace BookXchangeBE.BLL.Services
         IEnumerable<LivreDTO> GetByCategorie(int id);
 
         IEnumerable<LivreDTO> GetByTitle(string titre);
-        bool Insert(LivreDTO livre);
+        LivreDTO Insert(string Titre, string Auteur, string Synopsis);
         bool Update(int id, LivreDTO livre);
 
         bool Delete(int id);
