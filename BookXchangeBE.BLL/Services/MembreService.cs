@@ -37,6 +37,8 @@ namespace BookXchangeBE.BLL.Services
 ,
                 Role = role
             });
+            
+            //ConnectMember(pseudo, pwd);
 
             return membreRepository.GetById(id).ToDTO();
         }
@@ -77,7 +79,7 @@ namespace BookXchangeBE.BLL.Services
             };
                 
 
-            Console.WriteLine($"token : {cmDTO.Token} ");
+            //Console.WriteLine($"token : {cmDTO.Token} ");
             return (cmDTO);
         }
         #endregion

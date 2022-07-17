@@ -50,12 +50,15 @@ namespace BookXchangeBE.API.Controllers
 
         [AllowAnonymous]
         [HttpPost]
-        public IActionResult RegisterMembre(ApiMembreModel membre)
+        public IActionResult Register(ApiMembreModel membre)
         {
             MembreDTO dto = _membreService.Insert(membre.Pseudo, membre.Email, membre.Pwd, membre.Role);
             if (dto != null)
             {
-                return new CreatedResult("/api/Membres", dto);
+                //return new CreatedResult("/api/BookXchangeAPI", dto);
+                ApiConnectedMemberModel connectedMember = _membreService.ConnectMember(membre.Pseudo, membre.Pwd).ToApiConnected();
+
+                return Ok(connectedMember);
             }
             else
             {
