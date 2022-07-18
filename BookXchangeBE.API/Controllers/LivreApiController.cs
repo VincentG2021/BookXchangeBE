@@ -27,6 +27,8 @@ namespace BookXchangeBE.API.Controllers
             if (created != null)
             {
                 return Ok(created);
+                //return new CreatedResult("/api/bookList", created);
+
             }
             else
             {
@@ -42,6 +44,7 @@ namespace BookXchangeBE.API.Controllers
             if (updated != false)
             {
                 return Ok(updated);
+                //return new CreatedResult("/api/bookList", updated);
             }
             else
             {
@@ -50,13 +53,14 @@ namespace BookXchangeBE.API.Controllers
         }
 
         //[AllowAnonymous]
-        [HttpDelete]
+        [Authorize("isConnected")]
+        [HttpDelete("{id}")]
         public IActionResult DeleteLivre(int id)
         {
             bool deleted = _livreService.Delete(id);
             if (deleted != false)
             {
-                return new CreatedResult("/api/bookList", deleted);
+                return Ok(deleted);
             }
             else
             {
