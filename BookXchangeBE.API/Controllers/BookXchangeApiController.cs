@@ -28,7 +28,8 @@ namespace BookXchangeBE.API.Controllers
             _exemplaireService = exemplaireService;
         }
 
-        [Authorize("isConnected")]
+        //[Authorize("isConnected")]
+        [AllowAnonymous]
         [HttpGet(Name = "GetBookList")]
         public IActionResult GetBookList()
         {
