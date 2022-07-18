@@ -105,7 +105,7 @@ builder.Services.AddTransient<IMembreRepository, MembreRepository>();
 builder.Services.AddTransient<IEditionRepository, EditionRepository>();
 builder.Services.AddTransient<IExemplaireRepository, ExemplaireRepository>();
 // - BLL
-builder.Services.AddSingleton<JwtManager>();
+builder.Services.AddScoped<JwtManager>();
 builder.Services.AddScoped(typeof(LivreService));
 builder.Services.AddScoped<MembreService>();
 builder.Services.AddScoped<EditionService>();
