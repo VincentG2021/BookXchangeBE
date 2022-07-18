@@ -4,6 +4,7 @@ using BookXchangeBE.DAL.Interfaces;
 using BookXchangeBE.DAL.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using System.Data.SqlClient;
 using System.Text;
 using Tools.Connections;
@@ -51,7 +52,42 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = "Ma super API de livre pour BXL Formation O_o",
+        Version = "v1",
+        Description = "I'm baby flannel put a bird on it offal freegan. Air plant succulents iPhone glossier tumblr keytar photo booth church-key umami edison bulb. Shabby chic fam vinyl, you probably haven't heard of them shoreditch bushwick tonx pop-up typewriter skateboard meditation activated charcoal. Craft beer twee pok pok affogato adaptogen. Thundercats hoodie hashtag forage tumeric fixie yuccie.",
+        License = new OpenApiLicense
+        {
+            Name = "ISC",
+            Url = new Uri("https://fr.wikipedia.org/wiki/Licence_ISC")
+        }
+    });
+
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        In = ParameterLocation.Header,
+        Description = "Veuillez copier coller votre JWT ici précédé de \"Bearer\". Merci de votre compréhension. Bisous",
+        Name = "Authorization",
+        Type = SecuritySchemeType.ApiKey
+    });
+
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement {
+   {
+     new OpenApiSecurityScheme
+     {
+       Reference = new OpenApiReference
+       {
+         Type = ReferenceType.SecurityScheme,
+         Id = "Bearer"
+       }
+      },
+      new string[] { }
+    }
+  });
+});
 
 
 // ToolBox Tools.Connections
@@ -59,7 +95,7 @@ builder.Services.AddTransient<Connection>((service) =>
 {
     return new Connection(
         SqlClientFactory.Instance,
-        builder.Configuration.GetConnectionString("Home")
+        builder.Configuration.GetConnectionString("Default")
     );
 });
 
