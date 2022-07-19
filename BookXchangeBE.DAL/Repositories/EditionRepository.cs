@@ -48,7 +48,7 @@ namespace BookXchangeBE.DAL.Repositories
 
         public IEnumerable<EditionEntity> GetByLivre(int id)
         {
-            Command cmd = new Command("SELECT E.* FROM Edition E JOIN Livre L ON E.Id_Livre = L.Id_Livre WHERE L.Id_Livre = @id");
+            Command cmd = new Command("SELECT E.* FROM Edition E JOIN Livre L ON E.Id_Livre = L.Id_Livre WHERE L.Id_Livre = @Id_Livre");
 
             cmd.AddParameter("Id_Livre", id);
 

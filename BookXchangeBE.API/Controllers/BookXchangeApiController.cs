@@ -111,15 +111,6 @@ namespace BookXchangeBE.API.Controllers
             }
         }
 
-        //[Authorize("isConnected")]
-        [HttpGet(Name = "GetEditionList")]
-        public IActionResult GetEditionList()
-        {
-            IEnumerable<EditionDTO> editions = _editionService.GetAll()
-                                        .OrderBy(b => b.Format);
-
-            return Ok(editions.ToArray());
-        }
 
         //[Authorize("isConnected")]
         [HttpGet(Name = "GetExemplaireList")]
