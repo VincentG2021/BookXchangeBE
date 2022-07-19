@@ -9,5 +9,7 @@ namespace BookXchangeBE.DAL.Interfaces
 {
     public interface IEditionRepository : IRepository<int, EditionEntity>
     {
+        IEnumerable<EditionEntity> GetByLivre(int id);
+
     }
 }

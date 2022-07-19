@@ -31,7 +31,8 @@ namespace BookXchangeBE.BLL.Services
 
         public IEnumerable<EditionDTO> GetByLivre(int id)
         {
-            return editionRepository.GetAll().Where(c => c.IdEdition.Equals(id)).Select(b => b.ToDTO());
+            //return editionRepository.GetByLivre(id).Where(c => c.IdLivre.Equals(id)).Select(b => b.ToDTO());
+            return editionRepository.GetByLivre(id).Select(b => b.ToDTO());
         }
 
         //public IEnumerable<LivreDTO> GetByYear(int year)
