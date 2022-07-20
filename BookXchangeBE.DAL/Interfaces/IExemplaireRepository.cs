@@ -10,5 +10,7 @@ namespace BookXchangeBE.DAL.Interfaces
     public interface IExemplaireRepository : IRepository<int, ExemplaireEntity>
     {
         IEnumerable<ExemplaireEntity> GetByMembre(int id);
+        IEnumerable<ExemplaireEntity> GetByEdition(int id);
+        
     }
 }

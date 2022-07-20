@@ -40,7 +40,10 @@ namespace BookXchangeBE.DAL.Repositories
 
         public override IEnumerable<ExemplaireEntity> GetAll()
         {
-            Command cmd = new Command("SELECT * FROM Exemplaire");
+            Command cmd = new Command("SELECT * FROM Exemplaire Ex" +
+                " JOIN Membre AS M ON Ex.Id_Membre = M.Id_Membre" +
+                " JOIN Edition AS Ed ON Ex.Id_Edition = Ed.Id_Edition" +
+                " JOIN Livre AS L ON Ed.Id_Livre = L.Id_Livre");
 
             return _Connection.ExecuteReader(cmd, MapRecordToEntity);
         }
@@ -67,6 +70,21 @@ namespace BookXchangeBE.DAL.Repositories
 
             return _Connection.ExecuteReader(cmd, MapRecordToEntity);
         }
+
+        public IEnumerable<ExemplaireEntity> GetByEdition(int id)
+        {
+            Command cmd = new Command("SELECT M.Id_Membre, Ex.Id_Exemplaire, Ed.Id_Edition, L.Id_Livre, L.Titre, L.Auteur, L.Synopsis, Ed.ISBN, Ed.Parution, Ed.Format" +
+                " FROM Exemplaire Ex" +
+                " JOIN Membre AS M ON Ex.Id_Membre = M.Id_Membre" +
+                " JOIN Edition AS Ed ON Ex.Id_Edition = Ed.Id_Edition" +
+                " JOIN Livre AS L ON Ed.Id_Livre = L.Id_Livre" +
+                " WHERE Ex.Id_Edition = @Id_Edition");
+
+            cmd.AddParameter("Id_Edition", id);
+
+            return _Connection.ExecuteReader(cmd, MapRecordToEntity);
+        }
+
 
         public override int Insert(ExemplaireEntity entity)
         {

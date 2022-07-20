@@ -13,6 +13,7 @@ namespace BookXchangeBE.BLL.Services
         ExemplaireDTO GetById(int id);
         IEnumerable<ExemplaireDTO> GetByMembre(int id);
 
+        IEnumerable<ExemplaireDTO> GetByEdition(int id);
 
         bool Insert(ExemplaireDTO edition);
         bool Update(int id, ExemplaireDTO edition);

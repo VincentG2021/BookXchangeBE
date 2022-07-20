@@ -36,6 +36,14 @@ namespace BookXchangeBE.BLL.Services
 
         }
 
+        public IEnumerable<ExemplaireDTO> GetByEdition(int id)
+        {
+            //return editionRepository.GetByLivre(id).Where(c => c.IdLivre.Equals(id)).Select(b => b.ToDTO());
+            return exemplaireRepository.GetByEdition(id).Select(b => b.ToDTO());
+        }
+
+
+
         public bool Insert(ExemplaireDTO H)
         {
             return exemplaireRepository.Insert(H.ToEntity()) > 0;

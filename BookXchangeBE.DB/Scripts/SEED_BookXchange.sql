@@ -37,7 +37,8 @@ INSERT INTO [Edition]([Id_Edition], [ISBN], [Parution], [Format], [Id_Livre])
         (3, N'978-1-4028-1000-1', '2022-01-01', 'Plastifié', 3),
         (4, N'978-1-4028-2222-2', '2005-06-21', 'Illustrée', 4),
         (5, N'978-1-4028-9400-1', '1992-12-25', 'Reliure maison', 1),
-        (6, N'978-1-4028-9000-6', '2012-12-31', 'Poche', 2);
+        (6, N'978-1-4028-9000-6', '2012-12-31', 'Poche', 2),
+        (7, N'978-1-4028-2222-8', '1999-12-31', 'Poche', 4);
 
 SET IDENTITY_INSERT [Edition] OFF;
 GO
@@ -79,7 +80,10 @@ INSERT INTO [Exemplaire]([Id_Exemplaire], [Id_Membre], [Id_Edition])
         (3, 2, 3),
         (4, 2, 4),
         (5, 3, 5),
-        (6, 3, 6);
+        (6, 3, 6),
+        (7, 1, 2),
+        (8, 1, 7),
+        (9, 4, 7);
 
 
 SET IDENTITY_INSERT [Exemplaire] OFF;
