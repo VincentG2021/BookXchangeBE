@@ -8,7 +8,7 @@ namespace BookXchangeBE.API.Controllers
     [ApiController]
     [Route("[controller]/[action]")]
 
-    public class EditionApiController : Controller
+    public class EditionApiController : ControllerBase
     {
         IEditionService _editionService;
 
