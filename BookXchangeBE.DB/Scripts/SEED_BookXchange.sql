@@ -1,5 +1,5 @@
 ﻿
-USE BooksXchangeDB
+USE BookXchangeDB
 GO
 
 -- Member

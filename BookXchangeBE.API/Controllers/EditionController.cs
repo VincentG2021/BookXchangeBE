@@ -6,13 +6,13 @@ using Microsoft.AspNetCore.Mvc;
 namespace BookXchangeBE.API.Controllers
 {
     [ApiController]
-    [Route("[controller]/[action]")]
+    [Route("BookXchangeAPI/[controller]/[action]")]
 
-    public class EditionApiController : ControllerBase
+    public class EditionController : ControllerBase
     {
         IEditionService _editionService;
 
-        public EditionApiController(EditionService editionService)
+        public EditionController(EditionService editionService)
         {
             _editionService = editionService;
         }

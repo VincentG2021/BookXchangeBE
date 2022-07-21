@@ -8,12 +8,12 @@ using Microsoft.AspNetCore.Mvc;
 namespace BookXchangeBE.API.Controllers
 {
     [ApiController]
-    [Route("[controller]/[action]")]
+    [Route("BookXchangeAPI/[controller]/[action]")]
 
-    public class LivreApiController : ControllerBase
+    public class LivreController : ControllerBase
     {
         ILivreService _livreService;
-        public LivreApiController(LivreService livreService)
+        public LivreController(LivreService livreService)
         {
             _livreService = livreService;
         }

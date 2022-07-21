@@ -10,16 +10,16 @@ using Microsoft.AspNetCore.Mvc;
 namespace BookXchangeBE.API.Controllers
 {
     [ApiController]
-    [Route("[controller]/[action]")]
+    [Route("BookXchangeAPI/[controller]/[action]")]
 
-    public class BookXchangeAPIController : ControllerBase
+    public class MembreController : ControllerBase
     {
         IMembreService _membreService;
         ILivreService _livreService;
         IEditionService _editionService;
         IExemplaireService _exemplaireService;
 
-        public BookXchangeAPIController(LivreService livreService, MembreService memberService, EditionService editionService, ExemplaireService exemplaireService)
+        public MembreController(LivreService livreService, MembreService memberService, EditionService editionService, ExemplaireService exemplaireService)
         {
 
             _livreService = livreService;
@@ -56,7 +56,7 @@ namespace BookXchangeBE.API.Controllers
             MembreDTO dto = _membreService.Insert(membre.Pseudo, membre.Email, membre.Pwd, membre.Role);
             if (dto != null)
             {
-                //return new CreatedResult("/api/BookXchangeAPI", dto);
+                //return new CreatedResult("/BookXchangeAPI/Membre", dto);
                 ApiConnectedMemberModel connectedMember = _membreService.ConnectMember(membre.Pseudo, membre.Pwd).ToApiConnected();
 
                 return Ok(connectedMember);
@@ -69,7 +69,7 @@ namespace BookXchangeBE.API.Controllers
 
 
         [AllowAnonymous]
-        [HttpPost("auth")]
+        [HttpPost]
         public IActionResult Login(ApiMembreLogin form)
         {
             //if (!ModelState.IsValid) return BadRequest();
@@ -110,27 +110,5 @@ namespace BookXchangeBE.API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the database");
             }
         }
-
-
-        //[Authorize("isConnected")]
-        [HttpGet(Name = "GetExemplaireList")]
-        public IActionResult GetExemplaireList()
-        {
-            IEnumerable<ExemplaireDTO> exemplaires = _exemplaireService.GetAll();
-
-            return Ok(exemplaires.ToArray());
-        }
-
-        //[Authorize("isConnected")]
-        //[HttpGet(Name = "GetMemberExemplaireList")]
-        [HttpGet("{id}")]
-
-        public IActionResult GetMemberExemplaireList(int id)
-        {
-            IEnumerable<ExemplaireDTO> exemplaires = _exemplaireService.GetByMembre(id);
-
-            return Ok(exemplaires.ToArray());
-        }
-
     }
 }

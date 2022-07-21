@@ -56,9 +56,9 @@ builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo
     {
-        Title = "Ma super API de livre pour BXL Formation O_o",
+        Title = "BookXchangeAPI",
         Version = "v1",
-        Description = "I'm baby flannel put a bird on it offal freegan. Air plant succulents iPhone glossier tumblr keytar photo booth church-key umami edison bulb. Shabby chic fam vinyl, you probably haven't heard of them shoreditch bushwick tonx pop-up typewriter skateboard meditation activated charcoal. Craft beer twee pok pok affogato adaptogen. Thundercats hoodie hashtag forage tumeric fixie yuccie.",
+        Description = "Interface de Programmation d'Application pour échanges de livres",
         License = new OpenApiLicense
         {
             Name = "ISC",
@@ -69,7 +69,7 @@ builder.Services.AddSwaggerGen(c =>
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         In = ParameterLocation.Header,
-        Description = "Veuillez copier coller votre JWT ici précédé de \"Bearer\". Merci de votre compréhension. Bisous",
+        Description = "Veuillez copier coller votre JWT ici précédé de \"Bearer\".",
         Name = "Authorization",
         Type = SecuritySchemeType.ApiKey
     });
@@ -118,7 +118,7 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "BookXchangeAPI"));
 }
 
 app.UseHttpsRedirection();
