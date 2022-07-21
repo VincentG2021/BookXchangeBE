@@ -6,13 +6,13 @@ using Microsoft.AspNetCore.Mvc;
 namespace BookXchangeBE.API.Controllers
 {
     [ApiController]
-    [Route("[controller]/[action]")]
+    [Route("BookXchangeAPI/[controller]/[action]")]
 
-    public class ExemplaireApiController : ControllerBase
+    public class ExemplaireController : ControllerBase
     {
         IExemplaireService _exemplaireService;
 
-        public ExemplaireApiController(ExemplaireService exemplaireService)
+        public ExemplaireController(ExemplaireService exemplaireService)
         {
             _exemplaireService = exemplaireService;
         }
@@ -23,6 +23,26 @@ namespace BookXchangeBE.API.Controllers
         {
             IEnumerable<ExemplaireDTO> exemplaires = _exemplaireService.GetAll()
                                         .OrderBy(b => b.IdMembre);
+
+            return Ok(exemplaires.ToArray());
+        }
+
+        ////[Authorize("isConnected")]
+        //[HttpGet(Name = "GetExemplaireList")]
+        //public IActionResult GetExemplaireList()
+        //{
+        //    IEnumerable<ExemplaireDTO> exemplaires = _exemplaireService.GetAll();
+
+        //    return Ok(exemplaires.ToArray());
+        //}
+
+        //[Authorize("isConnected")]
+        //[HttpGet(Name = "GetExemplaireListByMember")]
+        [HttpGet("{id}")]
+
+        public IActionResult GetExemplaireListByMember(int id)
+        {
+            IEnumerable<ExemplaireDTO> exemplaires = _exemplaireService.GetByMembre(id);
 
             return Ok(exemplaires.ToArray());
         }
