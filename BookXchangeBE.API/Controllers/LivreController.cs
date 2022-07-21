@@ -36,6 +36,18 @@ namespace BookXchangeBE.API.Controllers
             }
         }
 
+        //[Authorize("isConnected")]
+        [AllowAnonymous]
+        [HttpGet(Name = "ReadLivreList")]
+        public IActionResult ReadLivreList()
+        {
+            IEnumerable<LivreDTO> livres = _livreService.GetAll()
+                                        .OrderBy(b => b.Titre);
+
+            return Ok(livres.ToArray());
+        }
+
+
         //[AllowAnonymous]
         [HttpPut]
         public IActionResult UpdateLivre(ApiLivreModel livre)
