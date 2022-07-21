@@ -11,6 +11,7 @@ namespace BookXchangeBE.DAL.Interfaces
     {
         IEnumerable<ExemplaireEntity> GetByMembre(int id);
         IEnumerable<ExemplaireEntity> GetByEdition(int id);
-        
+        IEnumerable<ExemplaireEntity> GetByLivre(int id);
+
     }
 }

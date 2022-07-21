@@ -27,17 +27,17 @@ namespace BookXchangeBE.API.Controllers
             return Ok(exemplaires.ToArray());
         }
 
-        ////[Authorize("isConnected")]
-        //[HttpGet(Name = "GetExemplaireList")]
-        //public IActionResult GetExemplaireList()
-        //{
-        //    IEnumerable<ExemplaireDTO> exemplaires = _exemplaireService.GetAll();
+        //[Authorize("isConnected")]
+        [HttpGet(Name = "GetExemplaireList")]
+        public IActionResult GetExemplaireList()
+        {
+            IEnumerable<ExemplaireDTO> exemplaires = _exemplaireService.GetAll();
 
-        //    return Ok(exemplaires.ToArray());
-        //}
+            return Ok(exemplaires.ToArray());
+        }
+
 
         //[Authorize("isConnected")]
-        //[HttpGet(Name = "GetExemplaireListByMember")]
         [HttpGet("{id}")]
 
         public IActionResult GetExemplaireListByMember(int id)
@@ -47,7 +47,6 @@ namespace BookXchangeBE.API.Controllers
             return Ok(exemplaires.ToArray());
         }
 
-
         //[Authorize("isConnected")]
         [AllowAnonymous]
         [HttpGet("{id}")]
@@ -55,6 +54,16 @@ namespace BookXchangeBE.API.Controllers
         {
             IEnumerable<ExemplaireDTO> exemplaires = _exemplaireService.GetByEdition(id);
             //.OrderBy(e => e.Parution);
+
+            return Ok(exemplaires.ToArray());
+        }
+
+        //[Authorize("isConnected")]
+        [AllowAnonymous]
+        [HttpGet("{id}")]
+        public IActionResult GetExemplairebyLivre(int id)
+        {
+            IEnumerable<ExemplaireDTO> exemplaires = _exemplaireService.GetByLivre(id);
 
             return Ok(exemplaires.ToArray());
         }
