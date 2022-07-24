@@ -56,6 +56,12 @@ namespace BookXchangeBE.BLL.Services
             return exemplaireRepository.Insert(E.ToEntity()) > 0;
         }
 
+        public bool UpdateExemplaire(ExemplaireDTO E)
+        {
+            return exemplaireRepository.UpdateExemplaire(E.ToEntity());
+        }
+
+
         public bool Update(int id, ExemplaireDTO E)
         {
             return exemplaireRepository.Update(id, E.ToEntity());
