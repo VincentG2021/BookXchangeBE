@@ -46,14 +46,19 @@ namespace BookXchangeBE.BLL.Services
             return exemplaireRepository.GetByLivre(id).Select(b => b.ToDTO());
         }
 
-        public bool Insert(ExemplaireDTO H)
+        public int CreateExemplaire(ExemplaireDTO E)
         {
-            return exemplaireRepository.Insert(H.ToEntity()) > 0;
+            return exemplaireRepository.CreateExemplaire(E.ToEntity());
         }
 
-        public bool Update(int id, ExemplaireDTO H)
+        public bool Insert(ExemplaireDTO E)
         {
-            return exemplaireRepository.Update(id, H.ToEntity());
+            return exemplaireRepository.Insert(E.ToEntity()) > 0;
+        }
+
+        public bool Update(int id, ExemplaireDTO E)
+        {
+            return exemplaireRepository.Update(id, E.ToEntity());
         }
 
         public bool Delete(int id)
