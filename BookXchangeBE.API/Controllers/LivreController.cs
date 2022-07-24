@@ -53,7 +53,7 @@ namespace BookXchangeBE.API.Controllers
         public IActionResult UpdateLivre(ApiLivreModel livre)
         {
             bool updated = _livreService.Update(livre.IdLivre, livre.ToDTO());
-            if (updated != false)
+            if (updated)
             {
                 return Ok(updated);
                 //return new CreatedResult("/api/bookList", updated);
@@ -70,7 +70,7 @@ namespace BookXchangeBE.API.Controllers
         public IActionResult DeleteLivre(int id)
         {
             bool deleted = _livreService.Delete(id);
-            if (deleted != false)
+            if (deleted)
             {
                 return Ok(deleted);
             }

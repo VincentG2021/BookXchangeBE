@@ -89,6 +89,23 @@ namespace BookXchangeBE.API.Controllers
             }
         }
 
+        //[Authorize("isConnected")]
+        //[AllowAnonymous]
+        [HttpPut]
+        public IActionResult UpdateExemplaire(ApiExemplaireModel exemplaire)
+        {
+            bool updated = _exemplaireService.UpdateExemplaire(exemplaire.ToDTO());
+            if (updated)
+            {
+                return Ok(updated);
+                //return new CreatedResult("/api/bookList", created);
+            }
+            else
+            {
+                return new BadRequestObjectResult(exemplaire);
+            }
+        }
+
 
         //[Authorize("isConnected")]
         [AllowAnonymous]

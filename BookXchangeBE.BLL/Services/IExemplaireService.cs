@@ -17,6 +17,7 @@ namespace BookXchangeBE.BLL.Services
 
         int CreateExemplaire(ExemplaireDTO exemplaire);
         bool Insert(ExemplaireDTO exemplaire);
+        bool UpdateExemplaire(ExemplaireDTO exemplaire);
         bool Update(int id, ExemplaireDTO exemplaire);
         bool Delete(int id);
 

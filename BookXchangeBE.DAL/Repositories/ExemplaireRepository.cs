@@ -144,6 +144,38 @@ namespace BookXchangeBE.DAL.Repositories
             return (int)_Connection.ExecuteScalar(cmd);
         }
 
+
+        public bool UpdateExemplaire(ExemplaireEntity entity)
+        {
+            Command cmd = new Command("UPDATE Livre SET Titre = @Titre, Auteur = @Auteur, Synopsis = @Synopsis" +
+                                      " WHERE Id_Livre = @Id_Livre; " +
+
+                                      " UPDATE Edition SET ISBN = @Isbn, Parution = @Parution, Format = @Format " +
+                                      " WHERE Id_Edition = @Id_Edition; " 
+                                      
+                                      //+
+
+                                      //" UPDATE Exemplaire SET Id_Membre = @Id_Membre, Id_Edition = @Id_Edition " +
+                                      //" WHERE Id_Exemplaire = @Id_Exemplaire;" 
+                                      );
+
+            cmd.AddParameter("Titre", entity.Titre);
+            cmd.AddParameter("Auteur", entity.Auteur);
+            cmd.AddParameter("Synopsis", entity.Synopsis);
+            cmd.AddParameter("Id_Livre", entity.IdLivre);
+
+            cmd.AddParameter("Isbn", entity.Isbn);
+            cmd.AddParameter("Parution", entity.Parution);
+            cmd.AddParameter("Format", entity.Format);
+            cmd.AddParameter("Id_Edition", entity.IdEdition);
+            
+            //cmd.AddParameter("Id_Membre", entity.IdMembre);
+            //cmd.AddParameter("Id_Edition", entity.IdEdition);
+            //cmd.AddParameter("Id_Exemplaire", id);
+
+            return _Connection.ExecuteNonQuery(cmd) == 1;
+        }
+
         public override bool Update(int id, ExemplaireEntity entity)
         {
             Command cmd = new Command("UPDATE Exemplaire SET Id_Membre = @IdMembre, Id_Edition = @IdEdition WHERE Id_Exemplaire = @Id_Exemplaire");
