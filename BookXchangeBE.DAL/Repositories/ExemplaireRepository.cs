@@ -99,6 +99,40 @@ namespace BookXchangeBE.DAL.Repositories
             return _Connection.ExecuteReader(cmd, MapRecordToEntity);
         }
 
+        public int CreateExemplaire(ExemplaireEntity entity)
+        {
+            Command cmd = new Command("DECLARE @insert_Livre_log TABLE (opIdLivre INT); " +
+                                       " DECLARE @insert_Edition_log TABLE (opIdEdition INT); " +
+                                       " DECLARE @insertedIdLivre INT; " +
+                                       " DECLARE @insertedIdEdition INT; " +
+                                       
+                                       " INSERT INTO Livre(Titre, Auteur, Synopsis) " +
+                                       " OUTPUT inserted.Id_Livre INTO @insert_Livre_log " +
+                                       " VALUES(@Titre, @Auteur, @Synopsis); " +
+                                       " SET @insertedIdLivre = (SELECT opIdLivre FROM @insert_Livre_log); " +
+                                       
+                                       " INSERT INTO Edition(ISBN, Parution, Format, Id_Livre) " +
+                                       " OUTPUT inserted.Id_Edition INTO @insert_Edition_log " +
+                                       " VALUES(@Isbn, @Parution, @Format, @insertedIdLivre); " +
+                                       " SET @insertedIdEdition = (SELECT opIdEdition FROM @insert_Edition_log); " +
+                                       
+                                       " INSERT INTO Exemplaire(Id_Membre, Id_Edition) " +
+                                    " OUTPUT inserted.Id_Exemplaire" +
+                                    " VALUES (@Id_Membre, @insertedIdEdition)");
+            cmd.AddParameter("Id_Membre", entity.IdMembre);
+            cmd.AddParameter("Titre", entity.Titre);
+            cmd.AddParameter("Auteur", entity.Auteur);
+            cmd.AddParameter("Synopsis", entity.Synopsis);
+
+            cmd.AddParameter("Isbn", entity.Isbn);
+            cmd.AddParameter("Parution", entity.Parution);
+            cmd.AddParameter("Format", entity.Format);
+
+            cmd.AddParameter("Id_Edition", entity.IdEdition);
+
+            return (int)_Connection.ExecuteScalar(cmd);
+        }
+
         public override int Insert(ExemplaireEntity entity)
         {
             Command cmd = new Command("INSERT INTO Exemplaire (Id_Membre, Id_Edition)" +
@@ -109,6 +143,7 @@ namespace BookXchangeBE.DAL.Repositories
 
             return (int)_Connection.ExecuteScalar(cmd);
         }
+
         public override bool Update(int id, ExemplaireEntity entity)
         {
             Command cmd = new Command("UPDATE Exemplaire SET Id_Membre = @IdMembre, Id_Edition = @IdEdition WHERE Id_Exemplaire = @Id_Exemplaire");

@@ -1,4 +1,6 @@
-﻿using BookXchangeBE.BLL.DTO;
+﻿using BookXchangeBE.API.Mappers;
+using BookXchangeBE.API.Models;
+using BookXchangeBE.BLL.DTO;
 using BookXchangeBE.BLL.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -66,6 +68,44 @@ namespace BookXchangeBE.API.Controllers
             IEnumerable<ExemplaireDTO> exemplaires = _exemplaireService.GetByLivre(id);
 
             return Ok(exemplaires.ToArray());
+        }
+
+
+        //[Authorize("isConnected")]
+        [AllowAnonymous]
+        [HttpPost]
+        public IActionResult CreateExemplaire(ApiExemplaireModel exemplaire)
+        {
+            int created = _exemplaireService.CreateExemplaire(exemplaire.ToDTO());
+            if (created >0)
+            {
+                return Ok(created);
+                //return new CreatedResult("/api/bookList", created);
+
+            }
+            else
+            {
+                return new BadRequestObjectResult(exemplaire);
+            }
+        }
+
+
+        //[Authorize("isConnected")]
+        [AllowAnonymous]
+        [HttpDelete("{id}")]
+        public IActionResult DeleteExemplaire(int id)
+        {
+            bool deleted = _exemplaireService.Delete(id);
+            if (deleted)
+            {
+                return Ok(deleted);
+                //return new CreatedResult("/api/bookList", created);
+
+            }
+            else
+            {
+                return new BadRequestObjectResult(id);
+            }
         }
 
     }
