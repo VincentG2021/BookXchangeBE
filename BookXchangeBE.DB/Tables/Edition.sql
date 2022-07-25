@@ -9,5 +9,5 @@
     CONSTRAINT [FK_Edition_Id_Livre] FOREIGN KEY([Id_Livre])
         REFERENCES [Livre] ([Id_Livre])
         ON UPDATE CASCADE
-		ON DELETE NO ACTION
+		ON DELETE CASCADE
 )

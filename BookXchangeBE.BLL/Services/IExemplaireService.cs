@@ -9,17 +9,22 @@ namespace BookXchangeBE.BLL.Services
 {
     public interface IExemplaireService
     {
-        IEnumerable<ExemplaireDTO> GetAll();
-        ExemplaireDTO GetById(int id);
-        IEnumerable<ExemplaireDTO> GetByMembre(int id);
-        IEnumerable<ExemplaireDTO> GetByEdition(int id);
-        IEnumerable<ExemplaireDTO> GetByLivre(int id);
-
+        // Create
         int CreateExemplaire(ExemplaireDTO exemplaire);
         bool Insert(ExemplaireDTO exemplaire);
+        
+        // Read
+        ExemplaireDTO GetById(int id);
+        IEnumerable<ExemplaireDTO> GetAll();
+        IEnumerable<ExemplaireDTO> GetByMembre(int id);
+        IEnumerable<ExemplaireDTO> GetByLivre(int id);
+        IEnumerable<ExemplaireDTO> GetByEdition(int id);
+
+        // Update
         bool UpdateExemplaire(ExemplaireDTO exemplaire);
         bool Update(int id, ExemplaireDTO exemplaire);
-        bool Delete(int id);
 
+        // Delete
+        bool Delete(int id);
     }
 }

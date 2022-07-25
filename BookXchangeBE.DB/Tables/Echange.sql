@@ -14,5 +14,5 @@
     CONSTRAINT [FK_Echange_Id_Exemplaire] FOREIGN KEY([Id_Exemplaire])
         REFERENCES [Exemplaire] ([Id_Exemplaire])
         ON UPDATE CASCADE
-		ON DELETE NO ACTION
+		ON DELETE CASCADE
 )

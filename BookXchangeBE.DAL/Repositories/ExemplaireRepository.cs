@@ -12,12 +12,9 @@ namespace BookXchangeBE.DAL.Repositories
 {
     public class ExemplaireRepository : RepositoryBase<int, ExemplaireEntity>, IExemplaireRepository
     {
-        public ExemplaireRepository(Connection connection) : base(connection, "Exemplaire", "Id_Exemplaire")
-        {
+        public ExemplaireRepository(Connection connection) : base(connection, "Exemplaire", "Id_Exemplaire") { }
 
-        }
-
-
+        // MAPPING
         protected override ExemplaireEntity MapRecordToEntity(IDataRecord record)
         {
             return new ExemplaireEntity()
@@ -34,71 +31,10 @@ namespace BookXchangeBE.DAL.Repositories
                 Isbn = (string)record["ISBN"],
                 Parution = (DateTime)record["Parution"],
                 Format = (string)record["Format"]
-
             };
         }
 
-        public override IEnumerable<ExemplaireEntity> GetAll()
-        {
-            Command cmd = new Command("SELECT * FROM Exemplaire Ex" +
-                " JOIN Membre AS M ON Ex.Id_Membre = M.Id_Membre" +
-                " JOIN Edition AS Ed ON Ex.Id_Edition = Ed.Id_Edition" +
-                " JOIN Livre AS L ON Ed.Id_Livre = L.Id_Livre");
-
-            return _Connection.ExecuteReader(cmd, MapRecordToEntity);
-        }
-
-        public override ExemplaireEntity GetById(int id)
-        {
-            Command cmd = new Command("SELECT * FROM Exemplaire WHERE Id_Exemplaire = @Id_Exemplaire");
-
-            cmd.AddParameter("Id_Exemplaire", id);
-
-            return _Connection.ExecuteReader(cmd, MapRecordToEntity).SingleOrDefault();
-        }
-
-        public IEnumerable<ExemplaireEntity> GetByMembre(int id)
-        {
-            Command cmd = new Command("SELECT M.Id_Membre, Ex.Id_Exemplaire, Ed.Id_Edition, L.Id_Livre, L.Titre, L.Auteur, L.Synopsis, Ed.ISBN, Ed.Parution, Ed.Format" +
-                " FROM Exemplaire Ex" +
-                " JOIN Membre AS M ON Ex.Id_Membre = M.Id_Membre" +
-                " JOIN Edition AS Ed ON Ex.Id_Edition = Ed.Id_Edition" +
-                " JOIN Livre AS L ON Ed.Id_Livre = L.Id_Livre" +
-                " WHERE M.Id_Membre = @Id_Membre");
-
-            cmd.AddParameter("Id_Membre", id);
-
-            return _Connection.ExecuteReader(cmd, MapRecordToEntity);
-        }
-
-        public IEnumerable<ExemplaireEntity> GetByEdition(int id)
-        {
-            Command cmd = new Command("SELECT M.Id_Membre, Ex.Id_Exemplaire, Ed.Id_Edition, L.Id_Livre, L.Titre, L.Auteur, L.Synopsis, Ed.ISBN, Ed.Parution, Ed.Format" +
-                " FROM Exemplaire Ex" +
-                " JOIN Membre AS M ON Ex.Id_Membre = M.Id_Membre" +
-                " JOIN Edition AS Ed ON Ex.Id_Edition = Ed.Id_Edition" +
-                " JOIN Livre AS L ON Ed.Id_Livre = L.Id_Livre" +
-                " WHERE Ex.Id_Edition = @Id_Edition");
-
-            cmd.AddParameter("Id_Edition", id);
-
-            return _Connection.ExecuteReader(cmd, MapRecordToEntity);
-        }
-
-        public IEnumerable<ExemplaireEntity> GetByLivre(int id)
-        {
-            Command cmd = new Command("SELECT M.Id_Membre, Ex.Id_Exemplaire, Ed.Id_Edition, L.Id_Livre, L.Titre, L.Auteur, L.Synopsis, Ed.ISBN, Ed.Parution, Ed.Format" +
-                " FROM Exemplaire Ex" +
-                " JOIN Membre AS M ON Ex.Id_Membre = M.Id_Membre" +
-                " JOIN Edition AS Ed ON Ex.Id_Edition = Ed.Id_Edition" +
-                " JOIN Livre AS L ON Ed.Id_Livre = L.Id_Livre" +
-                " WHERE L.Id_Livre = @Id_Livre");
-
-            cmd.AddParameter("Id_Livre", id);
-
-            return _Connection.ExecuteReader(cmd, MapRecordToEntity);
-        }
-
+        // CREATE
         public int CreateExemplaire(ExemplaireEntity entity)
         {
             Command cmd = new Command("DECLARE @insert_Livre_log TABLE (opIdLivre INT); " +
@@ -144,21 +80,75 @@ namespace BookXchangeBE.DAL.Repositories
             return (int)_Connection.ExecuteScalar(cmd);
         }
 
+        // READ
+        public override ExemplaireEntity GetById(int id)
+        {
+            Command cmd = new Command("SELECT * FROM Exemplaire Ex " +
+                                        " JOIN Edition Ed ON Ex.Id_Edition = Ed.Id_Edition " +
+                                        " JOIN Livre L ON Ed.Id_Livre = L.Id_Livre " +
+                                        " WHERE Id_Exemplaire = @Id_Exemplaire"
+                                        );
+            cmd.AddParameter("Id_Exemplaire", id);
+            return _Connection.ExecuteReader(cmd, MapRecordToEntity).SingleOrDefault();
+        }
 
+        public override IEnumerable<ExemplaireEntity> GetAll()
+        {
+            Command cmd = new Command("SELECT * FROM Exemplaire Ex" +
+                " JOIN Membre AS M ON Ex.Id_Membre = M.Id_Membre" +
+                " JOIN Edition AS Ed ON Ex.Id_Edition = Ed.Id_Edition" +
+                " JOIN Livre AS L ON Ed.Id_Livre = L.Id_Livre");
+            return _Connection.ExecuteReader(cmd, MapRecordToEntity);
+        }
+
+        public IEnumerable<ExemplaireEntity> GetByMembre(int id)
+        {
+            Command cmd = new Command("SELECT M.Id_Membre, Ex.Id_Exemplaire, Ed.Id_Edition, L.Id_Livre, L.Titre, L.Auteur, L.Synopsis, Ed.ISBN, Ed.Parution, Ed.Format" +
+                " FROM Exemplaire Ex" +
+                " JOIN Membre AS M ON Ex.Id_Membre = M.Id_Membre" +
+                " JOIN Edition AS Ed ON Ex.Id_Edition = Ed.Id_Edition" +
+                " JOIN Livre AS L ON Ed.Id_Livre = L.Id_Livre" +
+                " WHERE M.Id_Membre = @Id_Membre");
+            cmd.AddParameter("Id_Membre", id);
+            return _Connection.ExecuteReader(cmd, MapRecordToEntity);
+        }
+
+        public IEnumerable<ExemplaireEntity> GetByLivre(int id)
+        {
+            Command cmd = new Command("SELECT M.Id_Membre, Ex.Id_Exemplaire, Ed.Id_Edition, L.Id_Livre, L.Titre, L.Auteur, L.Synopsis, Ed.ISBN, Ed.Parution, Ed.Format" +
+                " FROM Exemplaire Ex" +
+                " JOIN Membre AS M ON Ex.Id_Membre = M.Id_Membre" +
+                " JOIN Edition AS Ed ON Ex.Id_Edition = Ed.Id_Edition" +
+                " JOIN Livre AS L ON Ed.Id_Livre = L.Id_Livre" +
+                " WHERE L.Id_Livre = @Id_Livre");
+            cmd.AddParameter("Id_Livre", id);
+            return _Connection.ExecuteReader(cmd, MapRecordToEntity);
+        }
+
+        public IEnumerable<ExemplaireEntity> GetByEdition(int id)
+        {
+            Command cmd = new Command("SELECT M.Id_Membre, Ex.Id_Exemplaire, Ed.Id_Edition, L.Id_Livre, L.Titre, L.Auteur, L.Synopsis, Ed.ISBN, Ed.Parution, Ed.Format" +
+                " FROM Exemplaire Ex" +
+                " JOIN Membre AS M ON Ex.Id_Membre = M.Id_Membre" +
+                " JOIN Edition AS Ed ON Ex.Id_Edition = Ed.Id_Edition" +
+                " JOIN Livre AS L ON Ed.Id_Livre = L.Id_Livre" +
+                " WHERE Ex.Id_Edition = @Id_Edition");
+            cmd.AddParameter("Id_Edition", id);
+            return _Connection.ExecuteReader(cmd, MapRecordToEntity);
+        }
+
+        // UPDATE
         public bool UpdateExemplaire(ExemplaireEntity entity)
         {
             Command cmd = new Command("UPDATE Livre SET Titre = @Titre, Auteur = @Auteur, Synopsis = @Synopsis" +
                                       " WHERE Id_Livre = @Id_Livre; " +
 
                                       " UPDATE Edition SET ISBN = @Isbn, Parution = @Parution, Format = @Format " +
-                                      " WHERE Id_Edition = @Id_Edition; " 
-                                      
+                                      " WHERE Id_Edition = @Id_Edition; "                                      
                                       //+
-
                                       //" UPDATE Exemplaire SET Id_Membre = @Id_Membre, Id_Edition = @Id_Edition " +
                                       //" WHERE Id_Exemplaire = @Id_Exemplaire;" 
                                       );
-
             cmd.AddParameter("Titre", entity.Titre);
             cmd.AddParameter("Auteur", entity.Auteur);
             cmd.AddParameter("Synopsis", entity.Synopsis);
@@ -172,8 +162,8 @@ namespace BookXchangeBE.DAL.Repositories
             //cmd.AddParameter("Id_Membre", entity.IdMembre);
             //cmd.AddParameter("Id_Edition", entity.IdEdition);
             //cmd.AddParameter("Id_Exemplaire", id);
-
-            return _Connection.ExecuteNonQuery(cmd) == 1;
+            int lignesAffected = _Connection.ExecuteNonQuery(cmd) ;
+            return lignesAffected > 0;
         }
 
         public override bool Update(int id, ExemplaireEntity entity)
@@ -181,19 +171,16 @@ namespace BookXchangeBE.DAL.Repositories
             Command cmd = new Command("UPDATE Exemplaire SET Id_Membre = @IdMembre, Id_Edition = @IdEdition WHERE Id_Exemplaire = @Id_Exemplaire");
             cmd.AddParameter("Id_Membre", entity.IdMembre);
             cmd.AddParameter("Id_Edition", entity.IdEdition);
-
             cmd.AddParameter("Id_Exemplaire", id);
-
             return _Connection.ExecuteNonQuery(cmd) == 1;
         }
 
+        // DELETE
         public override bool Delete(int id)
         {
-            Command cmd = new Command("DELETE FROM Exemplaire WHERE Id_Exemplaire  = @Id_Exemplaire");
+            Command cmd = new Command("DELETE FROM Exemplaire WHERE Id_Exemplaire = @Id_Exemplaire");
             cmd.AddParameter("Id_Exemplaire", id);
-
             return _Connection.ExecuteNonQuery(cmd) == 1;
         }
-
     }
 }
