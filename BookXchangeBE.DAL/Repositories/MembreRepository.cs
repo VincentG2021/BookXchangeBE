@@ -76,6 +76,14 @@ namespace BookXchangeBE.DAL.Repositories
             return ((int)_Connection.ExecuteScalar(cmd)) == 1;
         }
 
+        public override MembreEntity GetById(int id)
+        {
+            Command cmd = new Command($"SELECT Id_Membre, Pseudo, Email, Prenom, Nom, Role FROM Membre WHERE Id_Membre = @Id_Membre");
+            cmd.AddParameter("Id_Membre", id);
+
+            return _Connection.ExecuteReader(cmd, MapRecordToEntity).SingleOrDefault();
+        }
+
         public virtual MembreEntity GetByPseudo(string pseudo)
         {
             Command cmd = new Command($"SELECT * FROM {TableName} WHERE Pseudo = @Pseudo");
