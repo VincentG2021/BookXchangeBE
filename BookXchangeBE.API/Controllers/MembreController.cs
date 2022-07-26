@@ -89,6 +89,29 @@ namespace BookXchangeBE.API.Controllers
         }
 
         //[Authorize("isConnected")]
+        [HttpGet("{id}")]
+        //[HttpGet("{id}", Name = "GetMemberProfile")]
+
+        public IActionResult GetMembreById(int id)
+        {
+            try
+            {
+                ApiMembreModel membre = _membreService.GetById(id).ToAPI();
+
+                if (membre == null)
+                {
+                    return NotFound();
+                }
+                return Ok(membre);
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Error retrieving data from the database: {ex}");
+            }
+        }
+
+        //[Authorize("isConnected")]
         [HttpGet("{pseudo}")]
         //[HttpGet("{id}", Name = "GetMemberProfile")]
 

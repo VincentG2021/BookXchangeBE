@@ -103,7 +103,7 @@ namespace BookXchangeBE.BLL.Services
 
         public MembreDTO GetById(int id)
         {
-            throw new NotImplementedException();
+            return membreRepository.GetById(id).ToDTO();
         }
 
         public ConnectedMemberDTO GetMemberProfile(string pseudo)
