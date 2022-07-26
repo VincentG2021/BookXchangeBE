@@ -40,8 +40,8 @@ namespace BookXchangeBE.API.Controllers
         }
 
         [Authorize("isConnected")]
-        [HttpGet(Name = "GetMemberList")]
-        public IActionResult GetMemberList()
+        [HttpGet(Name = "GetMembreList")]
+        public IActionResult GetMembreList()
         {
             IEnumerable<MembreDTO> membres = _membreService.GetAll()
                                         .OrderBy(b => b.Pseudo);
