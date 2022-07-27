@@ -47,7 +47,9 @@ namespace BookXchangeBE.BLL.Mappers
                 Email = entity.Email,
                 Prenom = entity.Prenom,
                 Nom = entity.Nom,
-                Role = entity.Role
+                Role = entity.Role,
+                Localisation = entity.Localisation,
+                Image = entity.Image
             };
         }
     }

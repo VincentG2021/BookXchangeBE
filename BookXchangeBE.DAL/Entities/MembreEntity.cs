@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,11 @@ namespace BookXchangeBE.DAL.Entities
         public string? Nom { get; set; }
         public string PwdHash { get; set; }
         public int Role { get; set; }
+        public string? Localisation { get; set; }
+        public string? Image { get; set; }
+        public IFormFile? File { get; set; }
+
+
 
     }
 }

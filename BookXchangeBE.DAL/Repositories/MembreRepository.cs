@@ -26,7 +26,9 @@ namespace BookXchangeBE.DAL.Repositories
                 Prenom = record["Prenom"] is DBNull ? null : record["Prenom"].ToString(),
                 Nom = record["Nom"] is DBNull ? null : record["Nom"].ToString(),
                 PwdHash = null,
-                Role = (int)record["Role"]
+                Role = (int)record["Role"],
+                Localisation = record["Localisation"] is DBNull ? null : record["Localisation"].ToString(),
+                Image = record["Image"] is DBNull ? null : record["Image"].ToString(),
             };
         }
 
@@ -78,7 +80,7 @@ namespace BookXchangeBE.DAL.Repositories
 
         public override MembreEntity GetById(int id)
         {
-            Command cmd = new Command($"SELECT Id_Membre, Pseudo, Email, Prenom, Nom, Role FROM Membre WHERE Id_Membre = @Id_Membre");
+            Command cmd = new Command($"SELECT Id_Membre, Pseudo, Email, Prenom, Nom, Role, Localisation, Image FROM Membre WHERE Id_Membre = @Id_Membre");
             cmd.AddParameter("Id_Membre", id);
 
             return _Connection.ExecuteReader(cmd, MapRecordToEntity).SingleOrDefault();
@@ -98,6 +100,19 @@ namespace BookXchangeBE.DAL.Repositories
             cmd.AddParameter("Pseudo", pseudo);
 
             return _Connection.ExecuteReader(cmd, MapRecordToEntity).SingleOrDefault();
+        }
+
+        public bool UpdateImage(int id, string image)
+        {
+            Command cmd = new Command($" UPDATE Membre SET Image = @Image" +
+               $" OUTPUT inserted.Image" +
+               $" WHERE Id_Membre = @Id_Membre;"
+               );
+
+            cmd.AddParameter("Image", image);
+            cmd.AddParameter("Id_Membre", id);
+
+            return _Connection.ExecuteNonQuery(cmd) == 1;
         }
     }
 }

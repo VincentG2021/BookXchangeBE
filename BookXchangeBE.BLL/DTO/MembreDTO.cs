@@ -15,5 +15,6 @@ namespace BookXchangeBE.BLL.DTO
         public string? Nom { get; set; }
         public string PwdHash { get; set; }
         public int Role { get; set; }
+
     }
 }

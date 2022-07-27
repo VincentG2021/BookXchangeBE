@@ -21,6 +21,10 @@ namespace BookXchangeBE.Models
 
         [DisplayName("Role")]
         public int Role { get; set; }
+
+        [DisplayName("Image")]
+        public IFormFile? File { get; set; }
+
     }
 
     public class MembreRegister

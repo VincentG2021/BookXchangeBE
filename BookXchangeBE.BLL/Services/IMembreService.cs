@@ -11,20 +11,14 @@ namespace BookXchangeBE.BLL.Services
     {
         IEnumerable<MembreDTO> GetAll();
         IEnumerable<MembreDTO> GetByRole(int id);
-        MembreDTO GetById(int id);
+        ConnectedMemberDTO GetById(int id);
         MembreDTO GetByPseudo(string pseudo);
-
         bool CheckCredentials(string pseudo, string pwd);
-
         ConnectedMemberDTO ConnectMember(string pseudo, string password);
-
         ConnectedMemberDTO GetMemberProfile(string pseudo);
-
-
         MembreDTO Insert(string pseudo, string email, string pwd, int role);
         bool Update(int id, MembreDTO membre);
-
         bool Delete(int id);
-
+        public bool UpdateConnectedMembre(int id, string image);
     }
 }

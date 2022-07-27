@@ -14,6 +14,6 @@ namespace BookXchangeBE.DAL.Interfaces
         IEnumerable<ExemplaireEntity> GetByLivre(int id);
         int CreateExemplaire(ExemplaireEntity exemplaireEntity);
         bool UpdateExemplaire(ExemplaireEntity exemplaireEntity);
-        Task<string> UploadProductImage(MultipartFormDataContent content);
+        //Task<string> UploadImage(MultipartFormDataContent content);
     }
 }
