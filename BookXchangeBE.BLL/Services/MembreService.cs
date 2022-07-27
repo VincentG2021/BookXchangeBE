@@ -86,9 +86,9 @@ namespace BookXchangeBE.BLL.Services
 
 
         #region Crud
-        public IEnumerable<MembreDTO> GetAll()
+        public IEnumerable<ConnectedMemberDTO> GetAll()
         {
-            return membreRepository.GetAll().Select(b => b.ToDTO());
+            return membreRepository.GetAll().Select(b => b.CMToDTO());
         }
 
         public IEnumerable<MembreDTO> GetByRole(int id)

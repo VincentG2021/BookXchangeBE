@@ -46,7 +46,7 @@ namespace BookXchangeBE.API.Controllers
         [HttpGet(Name = "GetMembreList")]
         public IActionResult GetMembreList()
         {
-            IEnumerable<MembreDTO> membres = _membreService.GetAll()
+            IEnumerable<ConnectedMemberDTO> membres = _membreService.GetAll()
                                         .OrderBy(b => b.Pseudo);
 
             return Ok(membres.ToArray());
