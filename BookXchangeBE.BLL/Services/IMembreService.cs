@@ -9,7 +9,7 @@ namespace BookXchangeBE.BLL.Services
 {
     public interface IMembreService
     {
-        IEnumerable<MembreDTO> GetAll();
+        IEnumerable<ConnectedMemberDTO> GetAll();
         IEnumerable<MembreDTO> GetByRole(int id);
         ConnectedMemberDTO GetById(int id);
         MembreDTO GetByPseudo(string pseudo);
