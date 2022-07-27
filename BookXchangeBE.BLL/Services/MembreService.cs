@@ -101,9 +101,9 @@ namespace BookXchangeBE.BLL.Services
             return membreRepository.GetByPseudo(pseudo).ToDTO();
         }
 
-        public MembreDTO GetById(int id)
+        public ConnectedMemberDTO GetById(int id)
         {
-            return membreRepository.GetById(id).ToDTO();
+            return membreRepository.GetById(id).CMToDTO();
         }
 
         public ConnectedMemberDTO GetMemberProfile(string pseudo)
@@ -116,6 +116,12 @@ namespace BookXchangeBE.BLL.Services
         public bool Update(int id, MembreDTO membre)
         {
             return membreRepository.Update(id, membre.ToEntity());
+        }
+
+        public bool UpdateConnectedMembre(int id, string image)
+        {
+            return membreRepository.UpdateImage(id, image);
+
         }
 
         public bool Delete(int idMember)

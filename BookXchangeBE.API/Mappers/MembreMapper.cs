@@ -18,9 +18,9 @@ namespace BookXchangeBE.API.Mappers
             };
         }
 
-        public static ApiConnectedMemberModel ToApiConnected(this ConnectedMemberDTO dto)
+        public static ApiConnectedMembreModel ToApiConnected(this ConnectedMemberDTO dto)
         {
-            return new ApiConnectedMemberModel()
+            return new ApiConnectedMembreModel()
             {
                 IdMembre = dto.IdMembre,
                 Pseudo = dto.Pseudo,
@@ -28,7 +28,9 @@ namespace BookXchangeBE.API.Mappers
                 Prenom = dto.Prenom,
                 Nom = dto.Nom,
                 Role = dto.Role,
-                Token = dto.Token
+                Token = dto.Token,
+                Localisation = dto.Localisation,
+                Image = dto.Image
             };
         }
 

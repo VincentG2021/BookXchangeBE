@@ -5,11 +5,11 @@ GO
 -- Member
 SET IDENTITY_INSERT [Membre] ON;
 GO
-INSERT INTO [Membre]([Id_Membre], [Pseudo], [Email], [Prenom], [Nom], [Localisation], [Pwd_Hash], [Role])
- VALUES (1, 'Vinsooe', 'atortetatravers@gmail.com', 'Vincent', 'Gadé', 'Bruxelles', '$argon2id$v=19$m=65536,t=3,p=1$/8iMVvfjmYbdwgmmSU2VMQ$bTSTfC2gqenk72HxTxoOhCbkkimyWPTOnA9k9uCvYOI', 1), -- pwd: dd
- (2, 'Yolo', 'yolo@ymail.com', 'Yohann', 'Nayo', 'Liège', '$argon2id$v=19$m=65536,t=3,p=1$/8iMVvfjmYbdwgmmSU2VMQ$bTSTfC2gqenk72HxTxoOhCbkkimyWPTOnA9k9uCvYOI', 2), -- pwd: dd
- (3, 'VincentHome', 'v@v', null, null, null, '$argon2id$v=19$m=65536,t=3,p=1$50FW4HC6hy0DfOr5gc3oOg$ZD2CRVxvLqWb26lIoxeabfkaz6IGmwUN8i/1MybkxXw', 3), -- pwd: Test1234=
- (4, 'VGH', 'v@g', null, null, null, '$argon2id$v=19$m=65536,t=3,p=1$bBAIiIyBkt4dyRuSDYKrQg$9fvsWfhY8sWqP2naJ4teZK+ioykJAU7DKfPeXroh+DI', 1); -- pwd: Book4ever
+INSERT INTO [Membre]([Id_Membre], [Pseudo], [Email], [Prenom], [Nom], [Localisation], [Pwd_Hash], [Role], [Image])
+ VALUES (1, 'Vinsooe', 'atortetatravers@gmail.com', 'Vins', 'Ouille', 'Bruxelles', '$argon2id$v=19$m=65536,t=3,p=1$/8iMVvfjmYbdwgmmSU2VMQ$bTSTfC2gqenk72HxTxoOhCbkkimyWPTOnA9k9uCvYOI', 1, null), -- pwd: dd
+ (2, 'Flo', 'f@f', 'Florent', 'G', 'Rennes', '$argon2id$v=19$m=65536,t=3,p=1$/8iMVvfjmYbdwgmmSU2VMQ$bTSTfC2gqenk72HxTxoOhCbkkimyWPTOnA9k9uCvYOI', 2, 'https://avatars.githubusercontent.com/u/5496659?v=4'), -- pwd: dd
+ (3, 'Phil', 'p@p', 'Philémon', 'Tarcacode', 'Bruxelles', '$argon2id$v=19$m=65536,t=3,p=1$50FW4HC6hy0DfOr5gc3oOg$ZD2CRVxvLqWb26lIoxeabfkaz6IGmwUN8i/1MybkxXw', 3, 'https://avatars.githubusercontent.com/u/91825951?v=4'), -- pwd: Test1234=
+ (4, 'VGH', 'v@v', 'Vincent', 'Gadé', 'Home', '$argon2id$v=19$m=65536,t=3,p=1$bBAIiIyBkt4dyRuSDYKrQg$9fvsWfhY8sWqP2naJ4teZK+ioykJAU7DKfPeXroh+DI', 1, 'https://avatars.githubusercontent.com/u/82599533?s=400&u=e8202244ad8c3c8493814368782a6d09e47a993a&v=4'); -- pwd: Book4ever
 
 SET IDENTITY_INSERT [Membre] OFF;
 GO

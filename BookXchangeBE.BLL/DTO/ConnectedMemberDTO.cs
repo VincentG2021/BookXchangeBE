@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BookXchangeBE.BLL.DTO
 {
-    public class ConnectedMemberDTO 
+    public class ConnectedMemberDTO : MembreDTO
     {
         public int IdMembre { get; set; }
         public string Pseudo { get; set; }
@@ -15,6 +16,9 @@ namespace BookXchangeBE.BLL.DTO
         public string? Nom { get; set; }
         public int Role { get; set; }
         public string Token { get; set; }
+        public string? Localisation { get; set; }
+        public string? Image { get; set; }
+        public IFormFile? File { get; set; }
 
     }
 }

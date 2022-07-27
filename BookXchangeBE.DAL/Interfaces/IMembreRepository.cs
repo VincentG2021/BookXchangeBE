@@ -14,6 +14,6 @@ namespace BookXchangeBE.DAL.Interfaces
         MembreEntity GetById(int id);
         MembreEntity GetByPseudo(string pseudo);
         MembreEntity GetConnectedMember(string pseudo);
-
+        bool UpdateImage(int id, string image);
     }
 }

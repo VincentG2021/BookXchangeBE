@@ -5,6 +5,7 @@ using BookXchangeBE.BLL.Services;
 using BookXchangeBE.BLL.Tools;
 using BookXchangeBE.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookXchangeBE.API.Controllers
@@ -18,14 +19,16 @@ namespace BookXchangeBE.API.Controllers
         ILivreService _livreService;
         IEditionService _editionService;
         IExemplaireService _exemplaireService;
+        private IWebHostEnvironment _webHostEnvironment;
 
-        public MembreController(LivreService livreService, MembreService memberService, EditionService editionService, ExemplaireService exemplaireService)
+        public MembreController(LivreService livreService, MembreService memberService, EditionService editionService, ExemplaireService exemplaireService, IWebHostEnvironment webHostEnvironnement)
         {
 
             _livreService = livreService;
             _membreService = memberService;
             _editionService = editionService;
             _exemplaireService = exemplaireService;
+            _webHostEnvironment = webHostEnvironnement;
         }
 
         //[Authorize("isConnected")]
@@ -57,7 +60,7 @@ namespace BookXchangeBE.API.Controllers
             if (dto != null)
             {
                 //return new CreatedResult("/BookXchangeAPI/Membre", dto);
-                ApiConnectedMemberModel connectedMember = _membreService.ConnectMember(membre.Pseudo, membre.Pwd).ToApiConnected();
+                ApiConnectedMembreModel connectedMember = _membreService.ConnectMember(membre.Pseudo, membre.Pwd).ToApiConnected();
 
                 return Ok(connectedMember);
             }
@@ -82,7 +85,7 @@ namespace BookXchangeBE.API.Controllers
             }
 
 
-            ApiConnectedMemberModel connectedMember = _membreService.ConnectMember(form.Pseudo, form.Password).ToApiConnected();
+            ApiConnectedMembreModel connectedMember = _membreService.ConnectMember(form.Pseudo, form.Password).ToApiConnected();
 
 
             return Ok(connectedMember);
@@ -96,7 +99,7 @@ namespace BookXchangeBE.API.Controllers
         {
             try
             {
-                ApiMembreModel membre = _membreService.GetById(id).ToAPI();
+                ApiConnectedMembreModel membre = _membreService.GetById(id).ToApiConnected();
 
                 if (membre == null)
                 {
@@ -119,7 +122,7 @@ namespace BookXchangeBE.API.Controllers
         {
             try
             {
-                ApiConnectedMemberModel connectedMember = _membreService.GetMemberProfile(pseudo).ToApiConnected();
+                ApiConnectedMembreModel connectedMember = _membreService.GetMemberProfile(pseudo).ToApiConnected();
 
                 if (connectedMember == null)
                 {
@@ -133,5 +136,62 @@ namespace BookXchangeBE.API.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the database");
             }
         }
+
+        [HttpPut]
+        public IActionResult EditProfilMembre(int id, string fileName)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    if (fileName is null)
+                    {
+                        return BadRequest();
+                    }
+                    return NotFound();
+                }
+
+                bool updated = _membreService.UpdateConnectedMembre(id, fileName);
+                return Ok(updated);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Error: {ex}");
+            }
+        }
+
+        //public IActionResult EditProfilMembre(ApiConnectedMembreModel connectedMember)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        Membre membre = new Membre()
+        //        {
+        //            IdMembre = connectedMember.IdMembre,
+        //            Pseudo = connectedMember.Pseudo,
+        //            Role = connectedMember.Role,
+        //            File = connectedMember.File
+        //        };
+
+        //        string fileName;
+        //        if (connectedMember.File != null)
+        //        {
+        //            fileName = Guid.NewGuid().ToString() + connectedMember.File.FileName;
+        //            using (FileStream stream = new FileStream(_webHostEnvironment.WebRootPath + "/images/filmsImages/" + fileName, FileMode.Create))
+        //            {
+        //                connectedMember.File.CopyTo(stream);
+        //            }
+        //            Console.WriteLine(fileName);
+        //            membre.File = _membreService.UpdateConnectedMembre(connectedMember.IdMembre, fileName);
+        //        }
+        //        //Si form.File est null, récupérer Affiche du form pour le mettre dans Affiche du film
+        //        else
+        //        {
+        //            membre.File = connectedMember.File;
+        //            Console.WriteLine(membre.File);
+        //        }
+
+        //    }
+        //    return BadRequest();
+        //}
     }
 }
